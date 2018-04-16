@@ -1,0 +1,8 @@
+{
+  "name": "hilti-order-entry",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
