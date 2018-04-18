@@ -6,10 +6,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import {HttpClientModule} from "@angular/common/http";
+import { EmployeeProvider } from '../providers/employee/employee';
+import { CustomerProvider } from '../providers/customer/customer';
+import { AuthenticationProvider } from '../providers/authentication/authentication';
+import { OrderProvider } from '../providers/order/order';
+import {InMemoryCache} from "apollo-cache-inmemory";
 import {Apollo, ApolloModule} from "apollo-angular";
 import {HttpLink, HttpLinkModule} from "apollo-angular-link-http";
-import {InMemoryCache} from "apollo-cache-inmemory";
-import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import {HttpClientModule} from "@angular/common/http";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    EmployeeProvider,
+    CustomerProvider,
+    AuthenticationProvider,
+    OrderProvider,
   ]
 })
 export class AppModule {

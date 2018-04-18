@@ -7,8 +7,10 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(private navCtrl: NavController) {}
 
+  ionViewDidEnter() {
+    console.log("did load");
   }
 
 }
