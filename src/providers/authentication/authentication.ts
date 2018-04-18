@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Apollo} from "apollo-angular";
+import {Observable} from "rxjs/Observable";
+import {Employee} from "../../models/employee";
+import {Credential} from "../../models/credential";
+import constants from "../../app/constants";
 
 /*
   Generated class for the AuthenticationProvider provider.
@@ -10,8 +15,21 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthenticationProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello AuthenticationProvider Provider');
+  constructor(private http: HttpClient) {
+  }
+
+  /**
+   * Method to authenticate user against the backend
+   * When success, will return the user details from backend.
+   */
+  public authenticate(username:string, password:string): Observable<Employee> {
+
+    let credential: Credential = {
+      username,
+      password
+    };
+
+    return this.http.post<Employee>(`${constants.HOST_NAME}/login`, credential);
   }
 
 }

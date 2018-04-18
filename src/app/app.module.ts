@@ -14,6 +14,8 @@ import { OrderProvider } from '../providers/order/order';
 import {InMemoryCache} from "apollo-cache-inmemory";
 import {Apollo, ApolloModule} from "apollo-angular";
 import {HttpLink, HttpLinkModule} from "apollo-angular-link-http";
+import {IonicStorageModule} from "@ionic/storage";
+import {LocalStorageHelper} from "../helpers/localStorageHelper";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {HttpLink, HttpLinkModule} from "apollo-angular-link-http";
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     ApolloModule,
-    HttpLinkModule
+    HttpLinkModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,6 +43,7 @@ import {HttpLink, HttpLinkModule} from "apollo-angular-link-http";
     CustomerProvider,
     AuthenticationProvider,
     OrderProvider,
+    LocalStorageHelper
   ]
 })
 export class AppModule {
