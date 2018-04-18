@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {LocalStorageHelper} from "../../helpers/localStorageHelper";
 import {log} from "async";
+import {CustomerProvider} from "../../providers/customer/customer";
 
 @Component({
   selector: 'page-home',
@@ -9,26 +10,15 @@ import {log} from "async";
 })
 export class HomePage {
 
-  constructor(private localStorageHelper: LocalStorageHelper) {}
+  constructor(private localStorageHelper: LocalStorageHelper,
+              private customerProvider: CustomerProvider) {}
 
   ionViewDidEnter() {
-    console.log("Test local storage");
-    this.localStorageHelper.setLoggedInEmployee({
-      id: 1,
-      firstName: 'test',
-      lastName: 'test'
-    })
-      .then(res => {
-        console.log("done setting local storage");
+    this.customerProvider.getCustomerRepresentative(1)
+      .subscribe(res => {
+        console.log('done getting customer rep');
         console.log(res);
-      });
-
-
-    this.localStorageHelper.getLoggedInEmployee()
-      .then(loggedInEmployee => {
-        console.log("Done getting logged in employee");
-        console.log(loggedInEmployee)
-      });
+      })
   }
 
 }

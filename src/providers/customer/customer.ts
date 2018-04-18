@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import {CustomerRepresentative} from "../../models/customerRepresentative";
+import {Apollo} from "apollo-angular";
+import gql from "graphql-tag";
+import {map} from "rxjs/operators";
 
 /*
   Generated class for the CustomerProvider provider.
@@ -10,8 +15,28 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CustomerProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello CustomerProvider Provider');
+  constructor(private http: HttpClient,
+              private apollo: Apollo) {
+  }
+
+
+
+  public getCustomerRepresentative(representativeId: number): Observable<CustomerRepresentative> {
+    return this.apollo.watchQuery<any>({
+      query: gql`
+            query {
+                customerRepresentative(id: ${representativeId}) {
+                  id
+              }
+            }
+        `
+    })
+      .valueChanges
+      .pipe(
+        map(result => {
+          return result.data.customerRepresentative;
+        })
+      );
   }
 
 }
