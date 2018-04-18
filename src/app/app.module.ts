@@ -6,6 +6,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import {Apollo, ApolloModule} from "apollo-angular";
+import {HttpLink, HttpLinkModule} from "apollo-angular-link-http";
+import {InMemoryCache} from "apollo-cache-inmemory";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -14,7 +18,10 @@ import { HomePage } from '../pages/home/home';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule,
+    ApolloModule,
+    HttpLinkModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -27,4 +34,21 @@ import { HomePage } from '../pages/home/home';
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
-export class AppModule {}
+export class AppModule {
+
+  constructor(apollo: Apollo, httpLink: HttpLink) {
+
+    /**
+     * Set up apollo, to communicate with GraphQL Server
+     */
+    apollo.create({
+      link: httpLink.create({uri: 'http://localhost:9000/graphql'}),
+      cache: new InMemoryCache(),
+      defaultOptions: {
+        query: { fetchPolicy: 'network-only'},
+        watchQuery: { fetchPolicy: 'network-only'}
+      }
+    })
+  }
+
+}
