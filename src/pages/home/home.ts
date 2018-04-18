@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import {LocalStorageHelper} from "../../helpers/localStorageHelper";
-import {log} from "async";
 import {CustomerProvider} from "../../providers/customer/customer";
+import {NgRedux} from "@angular-redux/store";
+import {EMPLOYEE_LOGIN, EMPLOYEE_LOGOUT} from "../../app/reduxActions";
+import {AppState} from "../../app/store";
+import {Employee} from "../../models/employee";
 
 @Component({
   selector: 'page-home',
@@ -10,15 +12,30 @@ import {CustomerProvider} from "../../providers/customer/customer";
 })
 export class HomePage {
 
-  constructor(private localStorageHelper: LocalStorageHelper,
-              private customerProvider: CustomerProvider) {}
+  private loggedInEmployee: Employee;
+
+  constructor(private ngRedux: NgRedux<any>) {}
 
   ionViewDidEnter() {
-    this.customerProvider.getCustomerRepresentative(1)
-      .subscribe(res => {
-        console.log('done getting customer rep');
-        console.log(res);
-      })
+
+    this.ngRedux.select(state => state.loggedInEmployee)
+      .subscribe(loggedInEmployee => {
+        console.log("Redux logged in employee changed");
+        this.loggedInEmployee = loggedInEmployee;
+        console.log(this.loggedInEmployee);
+      });
+
+    this.ngRedux.dispatch({
+      type: EMPLOYEE_LOGIN,
+      payload: {
+        id: 1,
+        firstName: 'Ifandi',
+        lastName: 'last'
+      }
+    });
+
+
+
   }
 
 }

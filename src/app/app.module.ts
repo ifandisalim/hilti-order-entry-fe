@@ -16,6 +16,8 @@ import {Apollo, ApolloModule} from "apollo-angular";
 import {HttpLink, HttpLinkModule} from "apollo-angular-link-http";
 import {IonicStorageModule} from "@ionic/storage";
 import {LocalStorageHelper} from "../helpers/localStorageHelper";
+import {NgRedux, NgReduxModule} from "@angular-redux/store";
+import {AppState, INITIAL_STATE, rootReducer} from "./store";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import {LocalStorageHelper} from "../helpers/localStorageHelper";
     HttpClientModule,
     ApolloModule,
     HttpLinkModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    NgReduxModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,7 +51,7 @@ import {LocalStorageHelper} from "../helpers/localStorageHelper";
 })
 export class AppModule {
 
-  constructor(apollo: Apollo, httpLink: HttpLink) {
+  constructor(apollo: Apollo, httpLink: HttpLink, ngRedux: NgRedux<AppState>) {
 
     /**
      * Set up apollo, to communicate with GraphQL Server
@@ -60,7 +63,12 @@ export class AppModule {
         query: { fetchPolicy: 'network-only'},
         watchQuery: { fetchPolicy: 'network-only'}
       }
-    })
+    });
+
+    /**
+     * Set up Redux
+     */
+    ngRedux.configureStore(rootReducer, INITIAL_STATE);
   }
 
 }
