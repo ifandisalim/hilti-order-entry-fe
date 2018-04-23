@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import {LocalStorageHelper} from "../../helpers/localStorageHelper";
-import {CustomerProvider} from "../../providers/customer/customer";
 import {NgRedux} from "@angular-redux/store";
 import {EMPLOYEE_LOGIN, EMPLOYEE_LOGOUT} from "../../app/reduxActions";
-import {AppState} from "../../app/store";
+import {IAppState} from "../../app/store";
 import {Employee} from "../../models/employee";
 
 @Component({
@@ -14,7 +12,7 @@ export class HomePage {
 
   private loggedInEmployee: Employee;
 
-  constructor(private ngRedux: NgRedux<any>) {}
+  constructor(private ngRedux: NgRedux<IAppState>) {}
 
   ionViewDidEnter() {
 
@@ -25,17 +23,21 @@ export class HomePage {
         console.log(this.loggedInEmployee);
       });
 
+    // this.ngRedux.dispatch({
+    //   type: EMPLOYEE_LOGIN,
+    //   payload: {
+    //     id: 1,
+    //     firstName: 'Ifandi',
+    //     lastName: 'last'
+    //   }
+    // });
+
+
     this.ngRedux.dispatch({
-      type: EMPLOYEE_LOGIN,
-      payload: {
-        id: 1,
-        firstName: 'Ifandi',
-        lastName: 'last'
-      }
+      type: EMPLOYEE_LOGOUT
     });
 
-
-
   }
+  
 
 }
