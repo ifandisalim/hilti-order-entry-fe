@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {NgRedux} from "@angular-redux/store";
-import {EMPLOYEE_LOGIN, EMPLOYEE_LOGOUT} from "../../app/reduxActions";
-import {IAppState} from "../../app/store";
 import {Employee} from "../../models/employee";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../states/app.state";
+import {Observable} from "rxjs/Observable";
+import {EmployeeLogin, EmployeeLogout} from "../../states/employee/employee.actions";
 
 @Component({
   selector: 'page-home',
@@ -10,34 +11,28 @@ import {Employee} from "../../models/employee";
 })
 export class HomePage {
 
-  private loggedInEmployee: Employee;
+  private loggedInEmployee: Observable<Employee>;
 
-  constructor(private ngRedux: NgRedux<IAppState>) {}
+  constructor(private store: Store<AppState>) {
+    // Alternatively can have loggedInEmployee as Employee, and just subscribe select().subscribe()
+    // Advantage of Observable<Employee> is can use |async in template
+    this.loggedInEmployee = this.store.select('loggedInEmployee');
+  }
 
   ionViewDidEnter() {
-
-    this.ngRedux.select(state => state.loggedInEmployee)
-      .subscribe(loggedInEmployee => {
-        console.log("Redux logged in employee changed");
-        this.loggedInEmployee = loggedInEmployee;
-        console.log(this.loggedInEmployee);
-      });
-
-    // this.ngRedux.dispatch({
-    //   type: EMPLOYEE_LOGIN,
-    //   payload: {
-    //     id: 1,
-    //     firstName: 'Ifandi',
-    //     lastName: 'last'
-    //   }
-    // });
-
-
-    this.ngRedux.dispatch({
-      type: EMPLOYEE_LOGOUT
+    this.loggedInEmployee.subscribe(employee => {
+      console.log("logged in employee change");
+      console.log(employee)
     });
 
+    this.store.dispatch(new EmployeeLogin({
+      id: 1,
+      firstName: "ifandi",
+      lastName: "salim"
+    }));
+
+    this.store.dispatch(new EmployeeLogout());
   }
-  
+
 
 }
