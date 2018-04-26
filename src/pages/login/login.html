@@ -1,0 +1,35 @@
+<ion-content padding class="loginBg">
+	<img src="assets/imgs/logo.png" alt="logo" class="logo">
+
+
+	<div padding>
+		<ion-item class="itemform"></ion-item> <!-- Just to format -->
+
+		<ion-item class="itemform">
+			<ion-label color="light">
+				<ion-icon name="ios-person-outline"></ion-icon>
+			</ion-label>
+			<ion-input placeholder="E-mail Address" [(ngModel)]="username" type="text"></ion-input>
+		</ion-item>
+
+		<ion-item class="itemform">
+			<ion-label color="light">
+				<ion-icon name="ios-lock-outline"></ion-icon>
+			</ion-label>
+			<ion-input placeholder="••••••••" type="password" [(ngModel)]="password"></ion-input>
+		</ion-item>
+
+		<ion-row class="loginBtn" padding-vertical style="width: 95%">
+			<button ion-button default block outline color="light"
+							(click)="doLogin()">Log In
+			</button>
+		</ion-row>
+
+		<ion-row>
+			<ion-label class="resetHere" color="light" text-center>
+				Forgot Password? Reset here
+			</ion-label>
+		</ion-row>
+	</div>
+
+</ion-content>

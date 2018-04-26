@@ -1,0 +1,19 @@
+page-login {
+  .logo {
+    margin: 40% auto 0;
+    display: block;
+    padding-bottom: 10%;
+  }
+  .loginBtn {
+    margin-left: auto;
+  }
+  .loginBg {
+    background:
+    //overlay tint
+    linear-gradient(rgba(155, 0, 19, 0.9),rgba(155, 0, 19, 0.5)),
+
+    //background image
+    url("../assets/imgs/bg.png");
+    background-repeat: no-repeat;
+  }
+}

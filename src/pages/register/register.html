@@ -1,0 +1,49 @@
+
+<ion-header>
+
+  <ion-navbar color="tabRed">
+    <ion-title align="center">New Customer</ion-title>
+		<ion-buttons clear end>
+			<button clear ion-button padding-horizontal>
+				Done
+			</button>
+		</ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="masterBg">
+
+	<div>
+		<ion-item class="itemform">
+			<ion-input placeholder="Firstname" type="text"></ion-input>
+		</ion-item>
+
+		<ion-item class="itemform">
+			<ion-input placeholder="Lastname" type="text"></ion-input>
+		</ion-item>
+
+		<ion-item class="itemform">
+			<ion-input placeholder="Company" type="text"></ion-input>
+		</ion-item>
+	</div>
+
+	<div padding></div>
+
+	<div>
+		<ion-buttons>
+			<!--@NOTE: width:150% to hide right-chevrons-->
+			<button ion-item no-lines color="bgRed" style="width: 150%">
+				<ion-icon name="add-circle" padding-right></ion-icon>
+				add phone
+			</button>
+			<button ion-item no-lines color="bgRed" style="width: 150%">
+				<ion-icon name="add-circle" padding-right></ion-icon>
+				add email
+			</button>
+		</ion-buttons>
+	</div>
+
+
+</ion-content>

@@ -1,0 +1,21 @@
+page-notification {
+  .notification-divider {
+    color: rgba(248, 248, 255, 0.51);
+    font-weight: bolder;
+  }
+  .notificationTitle {
+    color: ghostwhite;
+  }
+  .notificationMessage {
+    color: rgba(222, 222, 222, 0.65);
+    font-size: small;
+  }
+  .notificationTime {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: smaller;
+    font-weight: bolder;
+    color: rgba(200, 200, 200, 0.4);
+    border-bottom: 1px solid rgba(120, 0, 17, 0.6);
+  }
+}
