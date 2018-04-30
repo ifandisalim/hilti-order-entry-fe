@@ -3,8 +3,11 @@ import {IonicPage, NavController, ToastController} from 'ionic-angular';
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
  import {Employee} from "../../models/employee";
  import {LocalStorageHelper} from "../../helpers/localStorageHelper";
- import {log} from "async";
  import {TabsPage} from "../tabs/tabs";
+ import {Store} from "@ngrx/store";
+ import {AppState} from "../../states/app.state";
+ import {EmployeeLogin} from "../../states/employee/employee.actions";
+ import {SetAccessToken} from "../../states/authentication/authentication.actions";
 
 
 /**
@@ -30,7 +33,8 @@ export class LoginPage {
   constructor(private navCtrl: NavController,
               private toastCtrl: ToastController,
               private authService: AuthenticationProvider,
-              private localStorageHelper: LocalStorageHelper) {
+              private localStorageHelper: LocalStorageHelper,
+              private store: Store<AppState>) {
 
   }
 
@@ -41,12 +45,19 @@ export class LoginPage {
     this.authService.authenticate(loginForm.value.username, loginForm.value.password)
       .subscribe(res => {
         this.isLoggingIn = false;
-        let loggedInEmployee: Employee = res;
+        let loggedInEmployee: Employee = res.body;
+        let accessToken: string = res.headers.get("Authorization");
+
+        this.store.dispatch(new EmployeeLogin(loggedInEmployee));
+        this.store.dispatch(new SetAccessToken(accessToken));
 
         this.localStorageHelper.setLoggedInEmployee(loggedInEmployee)
           .then(() => {
-            this.showToast("Welcome back " + loggedInEmployee.firstName);
-            this.navCtrl.setRoot(TabsPage);
+            this.localStorageHelper.setAccessToken(accessToken)
+              .then(() => {
+                this.showToast("Welcome back " + loggedInEmployee.firstName);
+                this.navCtrl.setRoot(TabsPage);
+              })
           });
 
       }, submitErr => {

@@ -28,6 +28,7 @@ import {RegisterPage} from "../pages/register/register";
 import {LoginPage} from "../pages/login/login";
 import {CustomerPage} from "../pages/customer/customer";
 import {ProductsPage} from "../pages/products/products";
+import {authenticationReducer} from "../states/authentication/authentication.reducers";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {ProductsPage} from "../pages/products/products";
   imports: [
     BrowserModule,
     StoreModule.forRoot({
-      loggedInEmployee: employeeReducer
+      loggedInEmployee: employeeReducer,
+      accessToken: authenticationReducer
     }),
     IonicModule.forRoot(MyApp),
     HttpClientModule,

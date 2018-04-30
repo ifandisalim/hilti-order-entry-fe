@@ -22,6 +22,12 @@ export class LocalStorageHelper {
       });
   }
 
+  public setAccessToken(accessToken: string): Promise<any> {
+    return this.storage.ready()
+      .then(() => {
+        this.storage.set("ACCESS_TOKEN", accessToken);
+      });
+  }
 
   /**
    * Get logged in employee details from local storage.
@@ -34,10 +40,24 @@ export class LocalStorageHelper {
           .then(loggedInEmployee => {
             if(loggedInEmployee === null) {
               console.log("LocalStorageHelper: loggedInEmployee is null in Local Storage");
-              return null;
             }
 
             return loggedInEmployee;
+          });
+      })
+  }
+
+
+  public getAccessToken(): Promise<string> {
+    return this.storage.ready()
+      .then(() => {
+        return this.storage.get("ACCESS_TOKEN")
+          .then(accessToken => {
+            if(accessToken === null) {
+              console.log("LocalStorageHelper: accessToken is null in Local Storage");
+            }
+
+            return accessToken;
           });
       })
   }
