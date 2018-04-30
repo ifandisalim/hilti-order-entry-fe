@@ -1,35 +1,34 @@
 <ion-content padding class="loginBg">
-	<img src="assets/imgs/logo.png" alt="logo" class="logo">
+    <img src="assets/imgs/logo.png" alt="logo" class="logo">
 
 
-	<div padding>
-		<ion-item class="itemform"></ion-item> <!-- Just to format -->
+    <div padding>
+        <ion-item class="itemform"></ion-item> <!-- Just to format -->
 
-		<ion-item class="itemform">
-			<ion-label color="light">
-				<ion-icon name="ios-person-outline"></ion-icon>
-			</ion-label>
-			<ion-input placeholder="E-mail Address" [(ngModel)]="username" type="text"></ion-input>
-		</ion-item>
+        <form #f="ngForm" (ngSubmit) = "doLogin(f.form)">
+            <ion-item class="itemform">
+                <ion-label color="light">
+                    <ion-icon name="ios-person-outline"></ion-icon>
+                </ion-label>
+                <ion-input placeholder="Username" type="text" name="username" ngModel required></ion-input>
+            </ion-item>
 
-		<ion-item class="itemform">
-			<ion-label color="light">
-				<ion-icon name="ios-lock-outline"></ion-icon>
-			</ion-label>
-			<ion-input placeholder="••••••••" type="password" [(ngModel)]="password"></ion-input>
-		</ion-item>
+            <ion-item class="itemform">
+                <ion-label color="light">
+                    <ion-icon name="ios-lock-outline"></ion-icon>
+                </ion-label>
+                <ion-input placeholder="••••••••" type="password" name="password" ngModel required></ion-input>
+            </ion-item>
 
-		<ion-row class="loginBtn" padding-vertical style="width: 95%">
-			<button ion-button default block outline color="light"
-							(click)="doLogin()">Log In
-			</button>
-		</ion-row>
+            <ion-row class="loginBtn" padding-vertical style="width: 95%">
+                <button ion-button default block outline color="light" [disabled]="!f.valid || isLoggingIn">
+                    <span *ngIf="!isLoggingIn">Log In</span>
+                    <ion-spinner *ngIf="isLoggingIn" name="crescent" color="light" text-center></ion-spinner>
+                </button>
+            </ion-row>
 
-		<ion-row>
-			<ion-label class="resetHere" color="light" text-center>
-				Forgot Password? Reset here
-			</ion-label>
-		</ion-row>
-	</div>
+            <ion-label *ngIf="submitErrorMsg !== ''" color="light" text-center="">{{submitErrorMsg}}</ion-label>
+        </form>
+    </div>
 
 </ion-content>

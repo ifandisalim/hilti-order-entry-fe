@@ -17,3 +17,4 @@ export class EmployeeLogout implements Action {
 }
 
 export type Actions = EmployeeLogin | EmployeeLogout
+

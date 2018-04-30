@@ -30,71 +30,71 @@ import {CustomerPage} from "../pages/customer/customer";
 import {ProductsPage} from "../pages/products/products";
 
 @NgModule({
-    declarations: [
-        MyApp,
-        ContactPage,
-        TabsPage,
-        PreferencePage,
-        FavoritePage,
-        NotificationPage,
-        RegisterPage,
-        LoginPage,
-        CustomerPage,
-        ProductsPage
+  declarations: [
+    MyApp,
+    ContactPage,
+    TabsPage,
+    PreferencePage,
+    FavoritePage,
+    NotificationPage,
+    RegisterPage,
+    LoginPage,
+    CustomerPage,
+    ProductsPage
 
-    ],
-    imports: [
-        BrowserModule,
-        StoreModule.forRoot({
-            loggedInEmployee: employeeReducer
-        }),
-        IonicModule.forRoot(MyApp),
-        HttpClientModule,
-        ApolloModule,
-        HttpLinkModule,
-        IonicStorageModule.forRoot()
-    ],
-    bootstrap: [IonicApp],
-    entryComponents: [
-        MyApp,
-        ContactPage,
-        TabsPage,
-        PreferencePage,
-        FavoritePage,
-        NotificationPage,
-        RegisterPage,
-        LoginPage,
-        CustomerPage,
-        ProductsPage
-    ],
-    providers: [
-        StatusBar,
-        SplashScreen,
-        {provide: ErrorHandler, useClass: IonicErrorHandler},
-        EmployeeProvider,
-        CustomerProvider,
-        AuthenticationProvider,
-        OrderProvider,
-        LocalStorageHelper
-    ]
+  ],
+  imports: [
+    BrowserModule,
+    StoreModule.forRoot({
+      loggedInEmployee: employeeReducer
+    }),
+    IonicModule.forRoot(MyApp),
+    HttpClientModule,
+    ApolloModule,
+    HttpLinkModule,
+    IonicStorageModule.forRoot()
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    ContactPage,
+    TabsPage,
+    PreferencePage,
+    FavoritePage,
+    NotificationPage,
+    RegisterPage,
+    LoginPage,
+    CustomerPage,
+    ProductsPage
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    EmployeeProvider,
+    CustomerProvider,
+    AuthenticationProvider,
+    OrderProvider,
+    LocalStorageHelper
+  ]
 })
 export class AppModule {
 
-    constructor(apollo: Apollo, httpLink: HttpLink) {
+  constructor(apollo: Apollo, httpLink: HttpLink) {
 
-        /**
-         * Set up apollo, to communicate with GraphQL Server
-         */
-        apollo.create({
-            link: httpLink.create({uri: 'http://localhost:9000/graphql'}),
-            cache: new InMemoryCache(),
-            defaultOptions: {
-                query: {fetchPolicy: 'network-only'},
-                watchQuery: {fetchPolicy: 'network-only'}
-            }
-        });
+    /**
+     * Set up apollo, to communicate with GraphQL Server
+     */
+    apollo.create({
+      link: httpLink.create({uri: 'http://localhost:9000/graphql'}),
+      cache: new InMemoryCache(),
+      defaultOptions: {
+        query: {fetchPolicy: 'network-only'},
+        watchQuery: {fetchPolicy: 'network-only'}
+      }
+    });
 
 
-    }
+  }
 
 }
