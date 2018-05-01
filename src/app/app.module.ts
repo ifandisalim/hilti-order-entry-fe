@@ -127,7 +127,10 @@ export class AppModule {
 
 
     // Ng Store to update access token whenever its changed
-    this.store.select('accessToken').subscribe(token => this.accessToken = token);
+    this.store.select('accessToken').subscribe(token => {
+      this.accessToken = token;
+      console.log("Access token used: " + this.accessToken );
+    });
 }
 
 

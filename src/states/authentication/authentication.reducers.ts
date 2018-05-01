@@ -3,7 +3,7 @@ import {Actions, REMOVE_ACCESS_TOKEN, SET_ACCESS_TOKEN} from "./authentication.a
 
 
 
-export function authenticationReducer(state: Employee = null, action: Actions) {
+export function authenticationReducer(state: string = null, action: Actions) {
   switch(action.type) {
     case SET_ACCESS_TOKEN:
       return action.payload;

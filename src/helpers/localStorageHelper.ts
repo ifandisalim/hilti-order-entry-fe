@@ -68,6 +68,7 @@ export class LocalStorageHelper {
    * @returns {Promise<any>}
    */
   public clearLocalStorage(): Promise<any> {
+    console.log("Clearing local storage");
     return this.storage.clear();
   }
 

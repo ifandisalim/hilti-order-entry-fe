@@ -42,7 +42,7 @@ export class MyApp {
           this.localStorageHelper.getAccessToken()
             .then(accessToken => {
 
-              if(loggedInEmployee == null) {
+              if(accessToken == null) {
                 console.log("app.component.ts: null accessToken in local storage");
                 return;
               }

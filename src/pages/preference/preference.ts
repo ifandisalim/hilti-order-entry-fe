@@ -37,6 +37,7 @@ export class PreferencePage {
       .then(() => {
         this.store.dispatch(new EmployeeLogout());
         this.store.dispatch(new RemoveAccessToken());
+
         this.tabBarElement.style.display = "none";
         this.navCtrl.setRoot(LoginPage);
       });
