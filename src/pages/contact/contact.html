@@ -1,112 +1,113 @@
 <ion-header>
-	<ion-navbar color="tabRed">
-		<ion-title align="center">Contact</ion-title>
+    <ion-navbar color="tabRed">
+        <ion-title align="center">Contact</ion-title>
 
-		<ion-buttons clear end>
+        <ion-buttons clear end>
 
-			<button clear ion-button padding-horizontal>
-				<ion-icon name="search"></ion-icon>
-			</button>
+            <button clear ion-button padding-horizontal>
+                <ion-icon name="search"></ion-icon>
+            </button>
 
-			<button ion-button (click)="registerCustomer()">
-				<ion-icon name="md-add"></ion-icon>
-			</button>
+            <button ion-button (click)="registerCustomer()">
+                <ion-icon name="md-add"></ion-icon>
+            </button>
 
-		</ion-buttons>
-	</ion-navbar>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
 <!--DUMMY DATA-->
 <ion-content class="masterBg">
-	<div padding class="spacer alpha-divider" style="width: 100%; height:20px">
-		A
-	</div>
-	<ion-list>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Somename Alastname</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Namehere Azme</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
 
-		<div padding class="spacer alpha-divider" style="width: 100%; height:20px">
-			B
-		</div>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Ella Bach</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Jon Berich</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Kyle Booze</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
+    <ion-list>
+        <div padding class="spacer alpha-divider" style="width: 100%; height:20px">
+            A
+        </div>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Somename Alastname</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Namehere Azme</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
 
-		<div padding class="spacer alpha-divider" style="width: 100%; height:20px">
-			C
-		</div>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Felix Cache</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Gayben Cezsh</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Hyde Chiq</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
+        <div padding class="spacer alpha-divider" style="width: 100%; height:20px">
+            B
+        </div>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Ella Bach</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Jon Berich</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Kyle Booze</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
 
-		<div padding class="spacer alpha-divider" style="width: 100%; height:20px">
-			D
-		</div>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Aida Dave</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Denise Debb</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Ellie Dhally</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Elly Digby</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">George Dllaloumo</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">George Douglas</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">George Duo</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
+        <div padding class="spacer alpha-divider" style="width: 100%; height:20px">
+            C
+        </div>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Felix Cache</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Gayben Cezsh</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Hyde Chiq</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
 
-		<div padding class="spacer alpha-divider" style="width: 100%; height:20px">
-			G
-		</div>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Ballad Gay</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
-		<button ion-item color="bgRed" class="item-border" (click)="custProfile()">
-			<div class="contactName">Debbie Geyze</div>
-			<div class="contactCompany">Companyname Inc.</div>
-		</button>
+        <div padding class="spacer alpha-divider" style="width: 100%; height:20px">
+            D
+        </div>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Aida Dave</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Denise Debb</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Ellie Dhally</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Elly Digby</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">George Dllaloumo</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">George Douglas</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">George Duo</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
 
-	</ion-list>
+        <div padding class="spacer alpha-divider" style="width: 100%; height:20px">
+            G
+        </div>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Ballad Gay</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+        <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+            <div class="contactName">Debbie Geyze</div>
+            <div class="contactCompany">Companyname Inc.</div>
+        </button>
+
+    </ion-list>
 
 </ion-content>

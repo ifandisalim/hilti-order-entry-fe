@@ -26,7 +26,9 @@ export class CustomerProvider {
       query: gql`
             query {
                 customerRepresentative(id: ${representativeId}) {
-                  id
+                  id,
+                  firstName,
+                  lastName
               }
             }
         `
@@ -35,6 +37,31 @@ export class CustomerProvider {
       .pipe(
         map(result => {
           return result.data.customerRepresentative;
+        })
+      );
+  }
+
+
+  public getAllCustomerRepresentative(): Observable<CustomerRepresentative[]> {
+    return this.apollo.watchQuery<any>({
+      query: gql`
+            query {
+                customerRepresentatives {
+                  id,
+                  firstName,
+                  lastName,
+                  company{
+                    id,
+                    name
+                  }
+              }
+            }
+        `
+    })
+      .valueChanges
+      .pipe(
+        map(result => {
+          return result.data.customerRepresentatives;
         })
       );
   }

@@ -25,7 +25,7 @@ export class LocalStorageHelper {
   public setAccessToken(accessToken: string): Promise<any> {
     return this.storage.ready()
       .then(() => {
-        this.storage.set("ACCESS_TOKEN", accessToken);
+        this.storage.set(constants.ACCESS_TOKEN, accessToken);
       });
   }
 
@@ -51,7 +51,7 @@ export class LocalStorageHelper {
   public getAccessToken(): Promise<string> {
     return this.storage.ready()
       .then(() => {
-        return this.storage.get("ACCESS_TOKEN")
+        return this.storage.get(constants.ACCESS_TOKEN)
           .then(accessToken => {
             if(accessToken === null) {
               console.log("LocalStorageHelper: accessToken is null in Local Storage");

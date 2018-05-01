@@ -5,7 +5,7 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
 
 import {MyApp} from './app.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HttpHeaders} from "@angular/common/http";
 import {EmployeeProvider} from '../providers/employee/employee';
 import {CustomerProvider} from '../providers/customer/customer';
 import {AuthenticationProvider} from '../providers/authentication/authentication';
@@ -15,7 +15,7 @@ import {Apollo, ApolloModule} from "apollo-angular";
 import {HttpLink, HttpLinkModule} from "apollo-angular-link-http";
 import {IonicStorageModule} from "@ionic/storage";
 import {LocalStorageHelper} from "../helpers/localStorageHelper";
-import {StoreModule} from "@ngrx/store";
+import {Store, StoreModule} from "@ngrx/store";
 import {employeeReducer} from "../states/employee/employee.reducers";
 
 // Pages
@@ -29,6 +29,11 @@ import {LoginPage} from "../pages/login/login";
 import {CustomerPage} from "../pages/customer/customer";
 import {ProductsPage} from "../pages/products/products";
 import {authenticationReducer} from "../states/authentication/authentication.reducers";
+import {setContext} from "apollo-link-context";
+import {AppState} from "../states/app.state";
+import {constant} from "async";
+import constants from "./constants";
+import {ApolloLink, concat} from "apollo-link";
 
 @NgModule({
   declarations: [
@@ -82,21 +87,48 @@ import {authenticationReducer} from "../states/authentication/authentication.red
 })
 export class AppModule {
 
-  constructor(apollo: Apollo, httpLink: HttpLink) {
+  accessToken: string = null;
 
-    /**
-     * Set up apollo, to communicate with GraphQL Server
-     */
-    apollo.create({
-      link: httpLink.create({uri: 'http://localhost:9000/graphql'}),
-      cache: new InMemoryCache(),
-      defaultOptions: {
-        query: {fetchPolicy: 'network-only'},
-        watchQuery: {fetchPolicy: 'network-only'}
-      }
+  constructor(apollo: Apollo,
+              httpLink: HttpLink,
+              private store: Store<AppState>,
+              private localStorageHelper: LocalStorageHelper) {
+
+
+    this.localStorageHelper.getAccessToken().then(token => {
+
+      this.accessToken = token;
+
+      /**
+       * Set up apollo, to communicate with GraphQL Server
+       * Set up inside getAccessToken() promise
+       */
+      apollo.create({
+        link: concat(authorizationMiddleware, http),
+        cache: new InMemoryCache(),
+        defaultOptions: {
+          query: {fetchPolicy: 'network-only'},
+          watchQuery: {fetchPolicy: 'network-only'}
+        }
+      });
+  });
+
+    // Link to GraphQL Server
+    const http = httpLink.create({ uri: 'http://localhost:9000/graphql' });
+
+    // Apollo middleware to add Authorization header to each request
+    const authorizationMiddleware = new ApolloLink((operation, forward) => {
+      operation.setContext({
+        headers: new HttpHeaders().set('Authorization', this.accessToken)
+      });
+
+      return forward(operation);
     });
 
 
-  }
+    // Ng Store to update access token whenever its changed
+    this.store.select('accessToken').subscribe(token => this.accessToken = token);
+}
+
 
 }

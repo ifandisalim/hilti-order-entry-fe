@@ -8,6 +8,7 @@ import {AuthenticationProvider} from "../../providers/authentication/authenticat
  import {AppState} from "../../states/app.state";
  import {EmployeeLogin} from "../../states/employee/employee.actions";
  import {SetAccessToken} from "../../states/authentication/authentication.actions";
+ import constants from "../../app/constants";
 
 
 /**
@@ -46,7 +47,7 @@ export class LoginPage {
       .subscribe(res => {
         this.isLoggingIn = false;
         let loggedInEmployee: Employee = res.body;
-        let accessToken: string = res.headers.get("Authorization");
+        let accessToken: string = res.headers.get(constants.HEADER_AUTHORIZATION);
 
         this.store.dispatch(new EmployeeLogin(loggedInEmployee));
         this.store.dispatch(new SetAccessToken(accessToken));
@@ -55,6 +56,7 @@ export class LoginPage {
           .then(() => {
             this.localStorageHelper.setAccessToken(accessToken)
               .then(() => {
+                console.log("Done setting access token");
                 this.showToast("Welcome back " + loggedInEmployee.firstName);
                 this.navCtrl.setRoot(TabsPage);
               })
@@ -79,21 +81,21 @@ export class LoginPage {
   renderFailedLoginMsg(errorType: string) {
 
     if(errorType === 'not_found_exception') {
-      this.submitErrorMsg = "User is not found.";
+      this.submitErrorMsg = constants.USER_NOT_FOUND;
       return;
     }
 
     if(errorType === 'authentication_exception') {
-      this.submitErrorMsg = "Wrong username / password.";
+      this.submitErrorMsg = constants.WRONG_CREDENTIALS;
       return;
     }
 
     if(errorType === 'Validation Error') {
-      this.submitErrorMsg = "Username / password can't be empty.";
+      this.submitErrorMsg = constants.WRONG_CREDENTIALS;
       return;
     }
 
-    this.submitErrorMsg = "Login failed unexpectedly. Please try again later."
+    this.submitErrorMsg = constants.UNEXPECTED_LOGIN_FAILURE;
   }
 
 }

@@ -2,24 +2,34 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {RegisterPage} from "../register/register";
 import {CustomerPage} from "../customer/customer";
+import {CustomerProvider} from "../../providers/customer/customer";
 
 @Component({
-    selector: 'page-contact',
-    templateUrl: 'contact.html'
+  selector: 'page-contact',
+  templateUrl: 'contact.html'
 })
 export class ContactPage {
 
-    constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+              private customerService: CustomerProvider) {
 
-    }
+  }
 
-    registerCustomer() {
-        this.navCtrl.push(RegisterPage);
-        console.log("here");
-    }
+  ionViewWillEnter() {
+    this.customerService.getAllCustomerRepresentative()
+      .subscribe(customerRepresentatives => {
+        console.log("Contact.ts: received customer representative");
+        console.log(customerRepresentatives);
+      });
+  }
 
-    custProfile() {
-        this.navCtrl.push(CustomerPage);
-    }
+  registerCustomer() {
+    this.navCtrl.push(RegisterPage);
+    console.log("here");
+  }
+
+  custProfile() {
+    this.navCtrl.push(CustomerPage);
+  }
 
 }
