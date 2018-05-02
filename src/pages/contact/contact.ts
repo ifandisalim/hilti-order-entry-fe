@@ -24,9 +24,6 @@ export class ContactPage {
       .subscribe(customerRepresentatives =>{
         this.customersByInitial = ContactPage.groupCustomersByInitial(customerRepresentatives);
         this.customerInitials = Object.keys(this.customersByInitial).sort();
-
-        console.log(this.customersByInitial);
-        console.log(this.customerInitials);
       });
   }
 
@@ -35,8 +32,8 @@ export class ContactPage {
     console.log("here");
   }
 
-  custProfile() {
-    this.navCtrl.push(CustomerPage);
+  viewCustomerProfile(customerId: number) {
+    this.navCtrl.push(CustomerPage, {id: customerId});
   }
 
   static groupCustomersByInitial(customers: CustomerRepresentative[]) {

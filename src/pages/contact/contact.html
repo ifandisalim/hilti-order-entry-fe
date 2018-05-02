@@ -26,7 +26,7 @@
                 {{initial | uppercase}}
             </div>
             <div *ngFor="let customer of customersByInitial[initial]">
-                <button ion-item color="bgRed" class="item-border" (click)="custProfile()">
+                <button ion-item color="bgRed" class="item-border" (click)="viewCustomerProfile(customer.id)">
                     <div class="contactName">
                         {{customer.firstName}}
                         {{customer.lastName}}

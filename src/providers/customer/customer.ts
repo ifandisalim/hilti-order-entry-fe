@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {CustomerRepresentative} from "../../models/customerRepresentative";
 import {Apollo} from "apollo-angular";
 import gql from "graphql-tag";
 import {map} from "rxjs/operators";
+import {Order} from "../../models/order";
 
 /*
   Generated class for the CustomerProvider provider.
@@ -20,7 +21,6 @@ export class CustomerProvider {
   }
 
 
-
   public getCustomerRepresentative(representativeId: number): Observable<CustomerRepresentative> {
     return this.apollo.watchQuery<any>({
       query: gql`
@@ -28,7 +28,14 @@ export class CustomerProvider {
                 customerRepresentative(id: ${representativeId}) {
                   id,
                   firstName,
-                  lastName
+                  lastName,
+                  creditLimit,
+                  creditUsed,
+                  customerClass
+                  company {
+                    id,
+                    name
+                  }
               }
             }
         `
@@ -62,6 +69,37 @@ export class CustomerProvider {
       .pipe(
         map(result => {
           return result.data.customerRepresentatives;
+        })
+      );
+  }
+
+
+  public getCustomerRepresentativeOrderHistorySummary(representativeId: number, offset: number): Observable<Order[]> {
+    return this.apollo.watchQuery<any>({
+      query: gql`
+            query {
+                customerRepOrderHistory(customerRepresentativeId: ${representativeId}, offset: ${offset}) {
+                  id,
+                  totalPrice,
+                  dateOrdered,
+                  datePaid,
+                  isPaid,
+                  buyer{
+                    id,
+                  },
+                  handler{
+                    id,
+                    firstName,
+                    lastName
+                  }
+              }
+            }
+        `
+    })
+      .valueChanges
+      .pipe(
+        map(result => {
+          return result.data.customerRepOrderHistory;
         })
       );
   }

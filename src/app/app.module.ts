@@ -96,7 +96,6 @@ export class AppModule {
 
 
     this.localStorageHelper.getAccessToken().then(token => {
-
       this.accessToken = token;
 
       /**

@@ -1,95 +1,102 @@
 <ion-header>
 
-	<ion-navbar color="tabRed">
-		<ion-title>Profile</ion-title>
-	</ion-navbar>
+    <ion-navbar color="tabRed">
+        <ion-title>Profile</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding-horizontal class="masterBg">
-	<ion-card color="cardYellow">
-		<ion-card-header style="height: 25px">
-			<ion-buttons clear end>
-				<button clear end ion-button no-padding class="btnFav" color="dark">
-					<ion-icon name="star-outline"></ion-icon>
-				</button>
-				<button clear end ion-button no-padding class="btnEdit" color="dark">
-					<ion-icon name="md-create"></ion-icon>
-				</button>
-			</ion-buttons>
+    <ion-card *ngIf="customerRepresentative" color="cardYellow">
+        <ion-card-header style="height: 25px">
+            <ion-buttons clear end>
+                <button clear end ion-button no-padding class="btnFav" color="dark">
+                    <ion-icon name="star-outline"></ion-icon>
+                </button>
+                <button clear end ion-button no-padding class="btnEdit" color="dark">
+                    <ion-icon name="md-create"></ion-icon>
+                </button>
+            </ion-buttons>
 
-		</ion-card-header>
-		<div class="customerName">Customer Name</div>
-		<div class="customerCompany">Company name</div>
+        </ion-card-header>
+        <div class="customerName">{{customerRepresentative.firstName}} {{customerRepresentative.lastName}}</div>
+        <div class="customerCompany">{{customerRepresentative.company.name}}</div>
 
-		<ion-card-content>
-			<ion-grid>
+        <ion-card-content>
+            <ion-grid>
 
-				<ion-row>
-					<ion-col padding>
-						<ion-icon name="phone-portrait"></ion-icon>
-					</ion-col>
-					<ion-col col-10>
-						<div class="cardContentTitle">MOBILE</div>
-						<div class="cardContent">+60 12 316 5657</div>
-					</ion-col>
-				</ion-row>
+                <ion-row>
+                    <ion-col padding>
+                        <ion-icon name="phone-portrait"></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                        <div class="cardContentTitle">MOBILE</div>
+                        <div class="cardContent">+60 12 316 5657</div>
+                    </ion-col>
+                </ion-row>
 
-				<ion-row>
-					<ion-col padding>
-						<ion-icon name="call"></ion-icon>
-					</ion-col>
-					<ion-col col-10>
-						<div class="cardContentTitle">WORK</div>
-						<div class="cardContent">+60 12 316 5668</div>
-					</ion-col>
-				</ion-row>
+                <ion-row>
+                    <ion-col padding>
+                        <ion-icon name="contact"></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                        <div class="cardContentTitle">CUSTOMER CLASS</div>
+                        <div class="cardContent">{{customerRepresentative.customerClass}}</div>
+                    </ion-col>
+                </ion-row>
 
-				<ion-row>
-					<ion-col padding>
-						<ion-icon name="mail"></ion-icon>
-					</ion-col>
-					<ion-col col-10>
-						<div class="cardContentTitle">WORK</div>
-						<div class="cardContent">someone@mail.com</div>
-					</ion-col>
-				</ion-row>
+                <ion-row>
+                    <ion-col padding>
+                        <ion-icon name="cash"></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                        <div class="cardContentTitle">CREDIT LIMIT</div>
+                        <div class="cardContent">RM {{customerRepresentative.creditUsed}} /
+                            {{customerRepresentative.creditLimit}}
+                        </div>
+                    </ion-col>
+                </ion-row>
 
-			</ion-grid>
-		</ion-card-content>
-	</ion-card>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
 
-	<ion-list padding-horizontal no-lines>
-		<ion-list-header color="cardYellow">
-			Recent Purchases
-			<ion-icon item-right name="arrow-up"></ion-icon>
-		</ion-list-header>
-	</ion-list>
-	<ion-list padding-horizontal>
-		<ion-grid>
-			<ion-row style="background: #eae6dd" class="listRecentPurchases" padding-top>
-				<ion-col class="listHeader">Date</ion-col>
-				<ion-col col-7 class="listHeader">Description</ion-col>
-				<ion-col class="listHeader">Status</ion-col>
-			</ion-row>
-			<ion-row style="background: #eae6dd" padding-bottom>
-				<ion-col class="listContent">11/11/2017</ion-col>
-				<ion-col col-7 class="listContent">Some anchoring device</ion-col>
-				<ion-col class="listContent">APPROVED</ion-col>
-			</ion-row>
-		</ion-grid>
-	</ion-list>
+    <ion-list padding-horizontal no-lines>
+        <ion-list-header color="cardYellow">
+            Recent Purchases
+            <ion-icon item-right name="arrow-up"></ion-icon>
+        </ion-list-header>
+    </ion-list>
+    <ion-list padding-horizontal *ngIf="orderHistory">
+        <ion-grid>
+            <ion-row style="background: #eae6dd" class="listRecentPurchases" padding-top>
+                <ion-col class="listHeader">Date</ion-col>
+                <ion-col class="listHeader">Handler</ion-col>
+                <ion-col  class="listHeader">Total Price</ion-col>
+                <ion-col class="listHeader">Status</ion-col>
+            </ion-row>
+            <ion-row *ngFor="let order of orderHistory" style="background: #eae6dd" padding-bottom >
+                <ion-col class="listContent">{{order.dateOrdered}}</ion-col>
+                <ion-col  class="listContent">{{order.handler.firstName}} {{order.handler.lastName}}</ion-col>
+                <ion-col  class="listContent">RM {{order.totalPrice}}</ion-col>
+                <ion-col class="listContent">
+                    {{order.isPaid ? 'PAID' : 'NOT PAID'}}
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-list>
 
-	<ion-list padding-horizontal no-lines>
-		<ion-list-header color="cardYellow">
-			Projects
-			<ion-icon item-right name="arrow-down"></ion-icon>
-		</ion-list-header>
-	</ion-list>
+    <ion-list padding-horizontal no-lines>
+        <ion-list-header color="cardYellow">
+            Projects
+            <ion-icon item-right name="arrow-down"></ion-icon>
+        </ion-list-header>
+    </ion-list>
 </ion-content>
 
 <ion-footer padding>
-	<button ion-button default block outline color="light" padding-horizontal (click)="gotoProduct()"> NEW ORDER </button>
+    <button ion-button default block outline color="light" padding-horizontal (click)="gotoProduct()"> NEW ORDER
+    </button>
 </ion-footer>
 
