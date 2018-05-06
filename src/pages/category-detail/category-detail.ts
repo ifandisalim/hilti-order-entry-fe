@@ -76,7 +76,10 @@ export class CategoryDetailPage {
         {
           text: 'Add',
           handler: (inputValue) => {
-            console.log('Adding ' + inputValue.quantity);
+            if(inputValue.quantity.trim() === ''){
+              return;
+            }
+
             this.orderHelper.addNewCartItem(product, inputValue.quantity);
           }
         }

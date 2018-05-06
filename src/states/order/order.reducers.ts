@@ -30,7 +30,7 @@ export function orderReducer(state: OrderItem[] = [], action: Actions) {
 
     case DECREASE_ORDER_ITEM_QUANTITY:
       return state.map(item => {
-        if(item === action.payload) {
+        if(item === action.payload && item.quantity >= 1) {
           item.quantity--
         }
         return item;
