@@ -4,6 +4,9 @@ import {RegisterPage} from "../register/register";
 import {CustomerPage} from "../customer/customer";
 import {CustomerProvider} from "../../providers/customer/customer";
 import {CustomerRepresentative} from "../../models/customerRepresentative";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../states/app.state";
+import {ClearCart} from "../../states/order/order.actions";
 
 @Component({
   selector: 'page-contact',
@@ -15,7 +18,8 @@ export class ContactPage {
   customerInitials = null;
 
   constructor(public navCtrl: NavController,
-              private customerService: CustomerProvider) {
+              private customerService: CustomerProvider,
+              private store: Store<AppState>) {
 
   }
 
@@ -25,11 +29,14 @@ export class ContactPage {
         this.customersByInitial = ContactPage.groupCustomersByInitial(customerRepresentatives);
         this.customerInitials = Object.keys(this.customersByInitial).sort();
       });
+
+
+    console.log("Clearning states");
+    this.store.dispatch(new ClearCart());
   }
 
   registerCustomer() {
     this.navCtrl.push(RegisterPage);
-    console.log("here");
   }
 
   viewCustomerProfile(customerId: number) {

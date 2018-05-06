@@ -30,13 +30,11 @@ export class CustomerPage {
   }
 
   gotoProduct() {
-    this.navCtrl.push(ProductsPage);
+    this.navCtrl.push(ProductsPage, {customerRepresentative: this.customerRepresentative});
   }
 
   // hide the tab-bar when entering
   ionViewWillEnter() {
-    this.tabBarElement.style.display = "none";
-
 
     this.customerService.getCustomerRepresentative(this.navParams.get("id"))
       .subscribe(customerDetail => {
@@ -50,11 +48,6 @@ export class CustomerPage {
       });
 
 
-  }
-
-  // unhide tab-bar when leaving
-  ionViewWillLeave() {
-    this.tabBarElement.style.display = "flex";
   }
 
 }

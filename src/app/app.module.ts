@@ -29,11 +29,12 @@ import {LoginPage} from "../pages/login/login";
 import {CustomerPage} from "../pages/customer/customer";
 import {ProductsPage} from "../pages/products/products";
 import {authenticationReducer} from "../states/authentication/authentication.reducers";
-import {setContext} from "apollo-link-context";
 import {AppState} from "../states/app.state";
-import {constant} from "async";
-import constants from "./constants";
 import {ApolloLink, concat} from "apollo-link";
+import { ProductProvider } from '../providers/product/product';
+import {orderReducer} from "../states/order/order.reducers";
+import {CategoryDetailPage} from "../pages/category-detail/category-detail";
+import {CartPage} from "../pages/cart/cart";
 
 @NgModule({
   declarations: [
@@ -46,14 +47,17 @@ import {ApolloLink, concat} from "apollo-link";
     RegisterPage,
     LoginPage,
     CustomerPage,
-    ProductsPage
+    ProductsPage,
+    CategoryDetailPage,
+    CartPage
 
   ],
   imports: [
     BrowserModule,
     StoreModule.forRoot({
       loggedInEmployee: employeeReducer,
-      accessToken: authenticationReducer
+      accessToken: authenticationReducer,
+      cart: orderReducer
     }),
     IonicModule.forRoot(MyApp),
     HttpClientModule,
@@ -72,7 +76,9 @@ import {ApolloLink, concat} from "apollo-link";
     RegisterPage,
     LoginPage,
     CustomerPage,
-    ProductsPage
+    ProductsPage,
+    CategoryDetailPage,
+    CartPage
   ],
   providers: [
     StatusBar,
@@ -82,7 +88,8 @@ import {ApolloLink, concat} from "apollo-link";
     CustomerProvider,
     AuthenticationProvider,
     OrderProvider,
-    LocalStorageHelper
+    LocalStorageHelper,
+    ProductProvider
   ]
 })
 export class AppModule {

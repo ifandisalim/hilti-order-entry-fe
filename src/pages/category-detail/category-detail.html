@@ -1,0 +1,42 @@
+<ion-header>
+
+    <ion-navbar color="tabRed">
+        <ion-title>{{parentCategory?.name}}</ion-title>
+        <ion-buttons clear end>
+            <button ion-button clear padding-horizontal>[0] <img src="assets/imgs/cart.png" style="padding-left: 5px">
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="masterBg" padding>
+    <h1>{{categoryDetail?.name}}</h1>
+    <p>{{categoryDetail?.description}}</p>
+
+
+    <ng-container *ngIf="categoryDetail">
+        <div class="product-card" *ngFor="let product of categoryDetail.products">
+            <div class="product-card--image">
+                <img src="{{product.imageUrl}}">
+            </div>
+
+            <main class="product-card--content">
+                <h3 class="product-card--content--title">SF-2HA</h3>
+                <p class="product-card--content-description">
+                    {{product.description}}
+                </p>
+                <p class="product-card--content-details">
+                    RM {{product.price}}
+                </p>
+            </main>
+
+            <div class="product-card--action-group">
+                <button (click)="addProductToCart(product.id)">
+                    <ion-icon name="add"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</ion-content>

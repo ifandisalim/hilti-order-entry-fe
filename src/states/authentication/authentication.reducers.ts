@@ -1,4 +1,4 @@
-import {Employee} from "../../models/employee";
+
 import {Actions, REMOVE_ACCESS_TOKEN, SET_ACCESS_TOKEN} from "./authentication.actions";
 
 

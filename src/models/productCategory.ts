@@ -1,3 +1,4 @@
+import {Product} from "./product";
 
 export interface ProductCategory {
   id?: number;
@@ -5,4 +6,7 @@ export interface ProductCategory {
   description?: string;
   imageUrl?: string;
   isMaster?: boolean;
+  childCategories: ProductCategory[];
+  parentCategory: ProductCategory;
+  products: Product[];
 }

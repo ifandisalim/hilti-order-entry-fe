@@ -3,4 +3,35 @@ page-products {
     color: #5e5d5c;
     font-weight: bold;
   }
+
+  .list{
+    margin: 0;
+  }
+
+
+
+  .list--level-2{
+    width: 95%;
+    font-size: 95%;
+    margin-left: auto;
+  }
+
+  .list--child{
+    background-color: #F0EDE8;
+    padding-left: 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .list--level-3{
+    width: 95%;
+    font-size: 95%;
+    margin-left: auto;
+  }
+
+  .list--level-2 > .list--child:last-of-type,
+  .list--level-3 > .list--child:last-of-type{
+
+  }
+
+
 }

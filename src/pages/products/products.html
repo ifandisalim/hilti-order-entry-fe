@@ -1,53 +1,51 @@
 <ion-header>
 
-	<ion-navbar color="tabRed">
-		<ion-title>Products</ion-title>
-		<ion-buttons clear end>
-			<button ion-button clear padding-horizontal>[0] <img src="assets/imgs/cart.png" style="padding-left: 5px"></button>
-		</ion-buttons>
-	</ion-navbar>
+    <ion-navbar color="tabRed">
+        <ion-title>Products</ion-title>
+        <ion-buttons clear end>
+            <button ion-button clear padding-horizontal (click)="viewCartsPage()">
+                [0] <img src="assets/imgs/cart.png" style="padding-left: 5px">
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content class="masterBg">
-	<ion-searchbar showCancelButton color="light"></ion-searchbar>
+    <ion-searchbar showCancelButton color="light"></ion-searchbar>
 
-	<!--DUMMY DATA-->
-	<ion-row style="background: #f0ede8">
-		<ion-col col-3><img src="assets/imgs/products/anchorsystem.png"></ion-col>
-		<ion-col align-self-center class="productName">^ Search bar has filter function.</ion-col>
-	</ion-row>
-	<ion-row style="background: #f0ede8">
-		<ion-col padding-left col-3><img src="assets/imgs/products/cordlesssystem.png"></ion-col>
-		<ion-col align-self-center class="productName">Check Ionic doc</ion-col>
-	</ion-row>
-	<ion-row style="background: #f0ede8">
-		<ion-col col-3><img src="assets/imgs/products/anchorsystem.png"></ion-col>
-		<ion-col align-self-center class="productName">Anchor System</ion-col>
-	</ion-row>
-	<ion-row style="background: #f0ede8">
-		<ion-col padding-left col-3><img src="assets/imgs/products/drillingdemolition.png"></ion-col>
-		<ion-col align-self-center class="productName">Drilling & Demolition</ion-col>
-	</ion-row>
-	<ion-row style="background: #f0ede8">
-		<ion-col padding-left col-3><img src="assets/imgs/products/cordlesssystem.png"></ion-col>
-		<ion-col align-self-center class="productName">Cordless Systems</ion-col>
-	</ion-row>
-	<ion-row style="background: #f0ede8">
-		<ion-col padding-left col-3><img src="assets/imgs/products/directfastening.png"></ion-col>
-		<ion-col align-self-center class="productName">Direct Fastening</ion-col>
-	</ion-row>
-	<ion-row style="background: #f0ede8">
-		<ion-col padding-left col-3><img src="assets/imgs/products/dustmgt.png"></ion-col>
-		<ion-col align-self-center class="productName">Dust Management</ion-col>
-	</ion-row>
-	<ion-row style="background: #f0ede8">
-		<ion-col padding-left col-3><img src="assets/imgs/products/cutsawgrind.png"></ion-col>
-		<ion-col align-self-center class="productName">Cutting Sawing & Grinding</ion-col>
-	</ion-row>
-	<ion-row style="background: #f0ede8">
-		<ion-col padding-left col-3><img src="assets/imgs/products/diamondcoring.png"></ion-col>
-		<ion-col align-self-center class="productName">Diamond Coring & Sawing</ion-col>
-	</ion-row>
+
+    <div *ngIf="categoriesWithProducts">
+
+        <div class="list list__multi-level">
+            <div *ngFor="let parentCategoryName of parentCategoryNames"
+                 class="list--level-1">
+                <ion-row class="list--child" (click)="toggleParentCategory(parentCategoryName)">
+                    <ion-col col-3>
+                        <img src="{{categoriesWithProducts[parentCategoryName].imageUrl}}" height="85%" width="85%">
+                    </ion-col>
+                    <ion-col align-self-center class="productName">
+                        {{categoriesWithProducts[parentCategoryName].name}}
+                    </ion-col>
+                </ion-row>
+
+                <ng-container *ngIf="categoriesWithProducts[parentCategoryName].childCategories.length > 0 && categoriesWithProducts[parentCategoryName].open ">
+                    <div *ngFor="let childCategory of categoriesWithProducts[parentCategoryName].childCategories"
+                         class="list--level-2">
+                        <ion-row class="list--child" (click)="viewDetailedCategoryPage(categoriesWithProducts[parentCategoryName], childCategory)">
+                            <ion-col col-3>
+                                <img src="{{childCategory.imageUrl}}" height="85%" width="85%">
+                            </ion-col>
+                            <ion-col align-self-center class="productName">
+                                {{childCategory.name}}
+                            </ion-col>
+                        </ion-row>
+
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
 </ion-content>
