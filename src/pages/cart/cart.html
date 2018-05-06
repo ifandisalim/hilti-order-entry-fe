@@ -9,7 +9,10 @@
     <ion-navbar color="tabRed">
         <ion-title>Cart</ion-title>
         <ion-buttons clear end>
-            <button ion-button clear padding-horizontal>[0]
+            <button ion-button clear padding-horizontal
+                    (click)="viewCartsPage()"
+            >
+                [{{shoppingCartItems.length}}]
                 <img src="assets/imgs/cart.png" style="padding-left: 5px">
             </button>
         </ion-buttons>
@@ -22,45 +25,48 @@
 
 
     <header>
-        <h1>Stephen Grider</h1>
-        <p>has <b>1 item</b> in cart</p>
+        <h1>{{currentActiveCustomer?.firstName}} {{currentActiveCustomer?.lastName}}</h1>
+        <p>has <b>{{shoppingCartItems?.length}} item</b> in cart</p>
     </header>
 
 
-    <div class="product-card product-card__cart-item">
-        <div class="product-card--image">
-            <img src="https://www.hilti.com/medias/sys_master/images/h16/9209652117534.jpg">
+    <ng-container *ngIf="shoppingCartItems?.length > 0">
+        <div    *ngFor="let cartItem of shoppingCartItems"
+                class="product-card product-card__cart-item">
+
+            <div class="product-card--image">
+                <img src="{{cartItem.product.imageUrl}}">
+            </div>
+
+            <main class="product-card--content">
+                <h3 class="product-card--content--title">{{cartItem.product.name}}</h3>
+                <p class="product-card--content-description">
+                    {{cartItem.product.description}}
+                </p>
+                <p class="product-card--content-details">
+                    RM {{cartItem.product.price}}
+            </main>
+
+            <div class="product-card--action-group">
+                <button (click)="increaseItemQuantity(cartItem)"
+                        class="product-card__cart-item--action">
+                    <ion-icon name="add"></ion-icon>
+                </button>
+
+                <div class="product-card__cart-item--value">{{cartItem.quantity}}</div>
+
+                <button (click)="decreaseItemQuantity(cartItem)"
+                        class="product-card__cart-item--action">
+                    <ion-icon name="remove"></ion-icon>
+                </button>
+            </div>
         </div>
-
-        <main class="product-card--content">
-            <h3 class="product-card--content--title">SF-2HA</h3>
-            <p class="product-card--content-description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad commodi culpa earum et eum facere, fugiat hic laboriosam
-                magni maxime, mollitia non officiis
-            </p>
-            <p class="product-card--content-details">
-                RM 200
-        </main>
-
-        <div class="product-card--action-group">
-            <button class="product-card__cart-item--action">
-                <ion-icon name="add"></ion-icon>
-            </button>
-
-            <div class="product-card__cart-item--value">3</div>
-
-            <button class="product-card__cart-item--action">
-                <ion-icon name="remove"></ion-icon>
-            </button>
-        </div>
-
-    </div>
-
+    </ng-container>
 
     <ion-footer padding>
         <div class="cart-summary">
             <h6 class="cart-summary--label">TOTAL</h6>
-            <h1 class="cart-summary--total">RM 1,500</h1>
+            <h1 class="cart-summary--total">RM {{totalCartPrice}}</h1>
         </div>
         <button ion-button default block outline color="light" padding-horizontal (click)="gotoProduct()">
             AUTHENTICATE ORDER

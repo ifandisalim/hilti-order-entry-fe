@@ -5,6 +5,10 @@ import {ProductProvider} from "../../providers/product/product";
 import {ProductCategory} from "../../models/productCategory";
 import {CategoryDetailPage} from "../category-detail/category-detail";
 import {CartPage} from "../cart/cart";
+import {OrderItem} from "../../models/orderItem";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../states/app.state";
+import {SetCurrentActiveCustomer} from "../../states/currentActiveCustomer/activeCustomer.actions";
 
 @IonicPage()
 @Component({
@@ -13,6 +17,7 @@ import {CartPage} from "../cart/cart";
 })
 export class ProductsPage {
 
+  shoppingCartItems: OrderItem[] = [];
   tabBarElement: any;
   customerRepresentative: CustomerRepresentative = null;
   categoriesWithProducts: {} = null;
@@ -20,15 +25,18 @@ export class ProductsPage {
 
   constructor(private navCtrl: NavController,
               private navParams: NavParams,
-              private productService: ProductProvider) {
+              private productService: ProductProvider,
+              private store: Store<AppState>) {
+
     this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+    this.store.select("shoppingCart").subscribe((orderItems) => this.shoppingCartItems = orderItems);
   }
 
 
   // hide the tab-bar when entering
   ionViewWillEnter() {
-
     this.customerRepresentative = this.navParams.get("customerRepresentative");
+    this.store.dispatch(new SetCurrentActiveCustomer(this.customerRepresentative));
 
 
     // Get Product Summary
@@ -67,7 +75,5 @@ export class ProductsPage {
   toggleParentCategory(categoryKey: string) {
     this.categoriesWithProducts[categoryKey].open = !this.categoriesWithProducts[categoryKey].open;
   }
-
-
 
 }

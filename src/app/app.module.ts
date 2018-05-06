@@ -35,6 +35,8 @@ import { ProductProvider } from '../providers/product/product';
 import {orderReducer} from "../states/order/order.reducers";
 import {CategoryDetailPage} from "../pages/category-detail/category-detail";
 import {CartPage} from "../pages/cart/cart";
+import {OrderHelper} from "../helpers/orderHelper";
+import {activeCustomerReducer} from "../states/currentActiveCustomer/activeCustomer.reducers";
 
 @NgModule({
   declarations: [
@@ -56,8 +58,9 @@ import {CartPage} from "../pages/cart/cart";
     BrowserModule,
     StoreModule.forRoot({
       loggedInEmployee: employeeReducer,
+      currentActiveCustomer: activeCustomerReducer,
       accessToken: authenticationReducer,
-      cart: orderReducer
+      shoppingCart: orderReducer
     }),
     IonicModule.forRoot(MyApp),
     HttpClientModule,
@@ -89,6 +92,7 @@ import {CartPage} from "../pages/cart/cart";
     AuthenticationProvider,
     OrderProvider,
     LocalStorageHelper,
+    OrderHelper,
     ProductProvider
   ]
 })

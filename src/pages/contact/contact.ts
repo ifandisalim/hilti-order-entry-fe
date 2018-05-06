@@ -7,6 +7,7 @@ import {CustomerRepresentative} from "../../models/customerRepresentative";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../states/app.state";
 import {ClearCart} from "../../states/order/order.actions";
+import {ClearCurrentActiveCustomer} from "../../states/currentActiveCustomer/activeCustomer.actions";
 
 @Component({
   selector: 'page-contact',
@@ -33,6 +34,7 @@ export class ContactPage {
 
     console.log("Clearning states");
     this.store.dispatch(new ClearCart());
+    this.store.dispatch(new ClearCurrentActiveCustomer());
   }
 
   registerCustomer() {

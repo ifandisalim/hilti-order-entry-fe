@@ -4,7 +4,8 @@
         <ion-title>Products</ion-title>
         <ion-buttons clear end>
             <button ion-button clear padding-horizontal (click)="viewCartsPage()">
-                [0] <img src="assets/imgs/cart.png" style="padding-left: 5px">
+                [{{shoppingCartItems.length}}]
+                <img src="assets/imgs/cart.png" style="padding-left: 5px">
             </button>
         </ion-buttons>
     </ion-navbar>
