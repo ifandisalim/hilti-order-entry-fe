@@ -2,7 +2,10 @@ import {Injectable} from "@angular/core";
 import {Product} from "../models/product";
 import {Store} from "@ngrx/store";
 import {AppState} from "../states/app.state";
-import {AddItemToCart, DecreaseItemQuantity, IncreaseItemQuantity} from "../states/order/order.actions";
+import {
+  AddItemToCart, DecreaseItemQuantity, IncreaseItemQuantity,
+  RemoveItemFromCart
+} from "../states/order/order.actions";
 import {OrderItem} from "../models/orderItem";
 
 @Injectable()
@@ -26,6 +29,10 @@ export class OrderHelper {
 
   decreaseCartItemQuantity(orderItem: OrderItem) {
     this.store.dispatch(new DecreaseItemQuantity(orderItem));
+  }
+
+  removeCartItem(orderItem: OrderItem) {
+    this.store.dispatch(new RemoveItemFromCart(orderItem));
   }
 
   calculateTotalOrderPrice(orderItems: OrderItem[]): number {

@@ -84,4 +84,13 @@
     justify-content: center;
   }
 
+  .product-card__cart-item--remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 8px;
+    max-width: 55px;
+    background-color: transparent;
+  }
+
 }

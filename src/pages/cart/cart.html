@@ -34,6 +34,11 @@
         <div    *ngFor="let cartItem of shoppingCartItems"
                 class="product-card product-card__cart-item">
 
+            <button (click)="removeItem(cartItem)"
+                    class="product-card__cart-item--remove">
+                <ion-icon name="close"></ion-icon>
+            </button>
+
             <div class="product-card--image">
                 <img src="{{cartItem.product.imageUrl}}">
             </div>

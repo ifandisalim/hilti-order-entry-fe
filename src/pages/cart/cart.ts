@@ -56,4 +56,8 @@ export class CartPage {
     this.orderHelper.decreaseCartItemQuantity(item);
   }
 
+  removeItem(item: OrderItem) {
+    this.orderHelper.removeCartItem(item);
+  }
+
 }
