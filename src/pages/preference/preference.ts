@@ -6,6 +6,7 @@ import {AppState} from "../../states/app.state";
 import {EmployeeLogout} from "../../states/employee/employee.actions";
 import {RemoveAccessToken} from "../../states/authentication/authentication.actions";
 import {LocalStorageHelper} from "../../helpers/localStorageHelper";
+import {ClearCart} from "../../states/order/order.actions";
 
 /**
  * Generated class for the PreferencePage page.
@@ -37,6 +38,7 @@ export class PreferencePage {
       .then(() => {
         this.store.dispatch(new EmployeeLogout());
         this.store.dispatch(new RemoveAccessToken());
+        this.store.dispatch(new ClearCart());
 
         this.tabBarElement.style.display = "none";
         this.navCtrl.setRoot(LoginPage);

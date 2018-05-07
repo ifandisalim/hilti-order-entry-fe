@@ -3,7 +3,7 @@ import {Product} from "../models/product";
 import {Store} from "@ngrx/store";
 import {AppState} from "../states/app.state";
 import {
-  AddItemToCart, DecreaseItemQuantity, IncreaseItemQuantity,
+  AddItemToCart, ClearCart, DecreaseItemQuantity, IncreaseItemQuantity,
   RemoveItemFromCart
 } from "../states/order/order.actions";
 import {OrderItem} from "../models/orderItem";
@@ -42,6 +42,12 @@ export class OrderHelper {
     }, 0)
 
   }
+
+  resetCart() {
+    this.store.dispatch(new ClearCart());
+  }
+
+
 
 
 }
