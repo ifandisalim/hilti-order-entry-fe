@@ -23,6 +23,10 @@ export class ProductsPage {
   categoriesWithProducts: {} = null;
   parentCategoryNames = null;
 
+  completeCategories = [];
+
+  productSearchTerm = "";
+
   constructor(private navCtrl: NavController,
               private navParams: NavParams,
               private productService: ProductProvider,
@@ -42,10 +46,15 @@ export class ProductsPage {
     // Get Product Summary
     this.productService.getCategoriesSummary()
       .subscribe(categories => {
-        this.categoriesWithProducts = this.groupProductsByParent(categories);
-        this.parentCategoryNames = Object.keys(this.categoriesWithProducts);
+        this.completeCategories = categories;
+        this.setCategoriesToDisplay(categories);
       });
 
+  }
+
+  setCategoriesToDisplay(categories) {
+    this.categoriesWithProducts = this.groupProductsByParent(categories);
+    this.parentCategoryNames = Object.keys(this.categoriesWithProducts);
   }
 
 
@@ -75,5 +84,47 @@ export class ProductsPage {
   toggleParentCategory(categoryKey: string) {
     this.categoriesWithProducts[categoryKey].open = !this.categoriesWithProducts[categoryKey].open;
   }
+
+  setFilteredProducts() {
+    let filteredCategories = this.filterByParentCategories(this.productSearchTerm);
+
+
+    if(filteredCategories.length <= 0) {
+      filteredCategories = this.filterByChildCategories(this.productSearchTerm);
+    }
+
+    this.setCategoriesToDisplay(filteredCategories);
+  }
+
+  filterByParentCategories(keyword: string) {
+    return this.completeCategories.filter(category => {
+
+      if (!category.childCategories || category.childCategories.length <= 0) {
+        return false;
+      }
+
+      return category.name.toLowerCase().includes(keyword.toLowerCase());
+    });
+  }
+
+  filterByChildCategories(keyword: string) {
+    let filteredByChildCategories = this.completeCategories.reduce((current, category) => {
+
+      if (!category.childCategories || category.childCategories.length <= 0) {
+        return current;
+      }
+
+      let filteredChildren = category.childCategories.filter(category => {
+        return category.name.toLowerCase().includes(keyword.toLowerCase());
+      });
+
+      current.push(Object.assign({}, category, {childCategories: filteredChildren}));
+      return current;
+
+    }, []);
+
+    return filteredByChildCategories.filter(category => category.childCategories.length > 0);
+  }
+
 
 }

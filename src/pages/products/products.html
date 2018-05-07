@@ -14,7 +14,13 @@
 
 
 <ion-content class="masterBg">
-    <ion-searchbar showCancelButton color="light"></ion-searchbar>
+    <ion-searchbar showCancelButton color="light"
+                   [(ngModel)]="productSearchTerm"
+                   (ionInput)="setFilteredProducts($event)"
+                   debounce="300"
+    >
+
+    </ion-searchbar>
 
 
     <div *ngIf="categoriesWithProducts">
@@ -34,7 +40,8 @@
                 <ng-container *ngIf="categoriesWithProducts[parentCategoryName].childCategories.length > 0 && categoriesWithProducts[parentCategoryName].open ">
                     <div *ngFor="let childCategory of categoriesWithProducts[parentCategoryName].childCategories"
                          class="list--level-2">
-                        <ion-row class="list--child" (click)="viewDetailedCategoryPage(categoriesWithProducts[parentCategoryName], childCategory)">
+                        <ion-row class="list--child"
+                                 (click)="viewDetailedCategoryPage(categoriesWithProducts[parentCategoryName], childCategory)">
                             <ion-col col-3>
                                 <img src="{{childCategory.imageUrl}}" height="85%" width="85%">
                             </ion-col>
