@@ -63,12 +63,13 @@
     </ion-card>
 
     <ion-list padding-horizontal no-lines>
-        <ion-list-header color="cardYellow">
+        <ion-list-header color="cardYellow" (click)="toggleRecentPurchase()">
             Recent Purchases
-            <ion-icon item-right name="arrow-up"></ion-icon>
+            <ion-icon item-right name="arrow-up" *ngIf="viewRecentPurchaseList"></ion-icon>
+            <ion-icon item-right name="arrow-down" *ngIf="!viewRecentPurchaseList"></ion-icon>
         </ion-list-header>
     </ion-list>
-    <ion-list padding-horizontal *ngIf="orderHistory">
+    <ion-list padding-horizontal *ngIf="orderHistory && viewRecentPurchaseList">
         <ion-grid>
             <ion-row style="background: #eae6dd" class="listRecentPurchases" padding-top>
                 <ion-col class="listHeader">Date</ion-col>

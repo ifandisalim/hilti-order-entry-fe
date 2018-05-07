@@ -23,6 +23,9 @@ export class CustomerPage {
   customerRepresentative: CustomerRepresentative = null;
   orderHistory: Order[] = null;
 
+  // Toggle State
+  viewRecentPurchaseList:boolean = true;
+
   constructor(private navCtrl: NavController,
               private navParams: NavParams,
               private customerService: CustomerProvider) {
@@ -35,7 +38,6 @@ export class CustomerPage {
 
   // hide the tab-bar when entering
   ionViewWillEnter() {
-
     this.customerService.getCustomerRepresentative(this.navParams.get("id"))
       .subscribe(customerDetail => {
         this.customerRepresentative = customerDetail;
@@ -46,8 +48,11 @@ export class CustomerPage {
             console.log(this.orderHistory);
           });
       });
+  }
 
-
+  // Toggle open attribute for parent category
+  toggleRecentPurchase() {
+    this.viewRecentPurchaseList= !this.viewRecentPurchaseList;
   }
 
 }
