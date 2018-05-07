@@ -8,6 +8,7 @@ import {Store} from "@ngrx/store";
 import {AppState} from "../../states/app.state";
 import {ClearCart} from "../../states/order/order.actions";
 import {ClearCurrentActiveCustomer} from "../../states/currentActiveCustomer/activeCustomer.actions";
+import {CustomerHelper} from "../../helpers/customerHelper";
 
 @Component({
   selector: 'page-contact',
@@ -19,6 +20,7 @@ export class ContactPage {
   customerInitials = null;
 
   constructor(public navCtrl: NavController,
+              private customerHelper: CustomerHelper,
               private customerService: CustomerProvider,
               private store: Store<AppState>) {
 
@@ -27,7 +29,7 @@ export class ContactPage {
   ionViewWillEnter() {
     this.customerService.getAllCustomerRepresentative()
       .subscribe(customerRepresentatives =>{
-        this.customersByInitial = ContactPage.groupCustomersByInitial(customerRepresentatives);
+        this.customersByInitial = this.customerHelper.groupCustomersByInitial(customerRepresentatives);
         this.customerInitials = Object.keys(this.customersByInitial).sort();
       });
 
@@ -45,14 +47,6 @@ export class ContactPage {
     this.navCtrl.push(CustomerPage, {id: customerId});
   }
 
-  static groupCustomersByInitial(customers: CustomerRepresentative[]) {
-    return customers.reduce((currentCustomers, customer) => {
 
-      let customerInitial = customer.firstName.toLowerCase()[0];
-      currentCustomers[customerInitial] = currentCustomers[customerInitial] || [];
-      currentCustomers[customerInitial].push(customer);
-      return currentCustomers;
-    }, {})
-  }
 
 }

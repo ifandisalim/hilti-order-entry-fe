@@ -1,11 +1,32 @@
 <ion-header>
-  <ion-navbar color="tabRed">
-    <ion-title align="center">Favorite</ion-title>
-  </ion-navbar>
+    <ion-navbar color="tabRed">
+        <ion-title align="center">Favorite</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding class="masterBg">
+    <h1 *ngIf="!customersByInitial">No favourite customer yet.</h1>
 
+    <ion-list *ngIf="customerInitials">
+
+        <div *ngFor="let initial of customerInitials">
+            <div padding class="spacer alpha-divider" style="width: 100%; height:20px">
+                {{initial | uppercase}}
+            </div>
+            <div *ngFor="let customer of customersByInitial[initial]">
+                <button ion-item color="bgRed" class="item-border" (click)="viewCustomerProfile(customer.id)">
+                    <div class="contactName">
+                        {{customer.firstName}}
+                        {{customer.lastName}}
+                    </div>
+                    <div class="contactCompany">
+                        {{customer.company.name}}
+                    </div>
+                </button>
+            </div>
+        </div>
+
+    </ion-list>
 </ion-content>

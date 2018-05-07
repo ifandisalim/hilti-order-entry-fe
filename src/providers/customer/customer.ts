@@ -35,6 +35,9 @@ export class CustomerProvider {
                   company {
                     id,
                     name
+                  },
+                  favouritedBy{
+                    id
                   }
               }
             }

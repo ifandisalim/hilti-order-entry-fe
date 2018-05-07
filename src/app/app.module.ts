@@ -37,6 +37,7 @@ import {CategoryDetailPage} from "../pages/category-detail/category-detail";
 import {CartPage} from "../pages/cart/cart";
 import {OrderHelper} from "../helpers/orderHelper";
 import {activeCustomerReducer} from "../states/currentActiveCustomer/activeCustomer.reducers";
+import {CustomerHelper} from "../helpers/customerHelper";
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import {activeCustomerReducer} from "../states/currentActiveCustomer/activeCusto
     OrderProvider,
     LocalStorageHelper,
     OrderHelper,
+    CustomerHelper,
     ProductProvider
   ]
 })

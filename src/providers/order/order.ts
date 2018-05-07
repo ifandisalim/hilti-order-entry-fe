@@ -15,7 +15,6 @@ import {Observable} from "rxjs/Observable";
 export class OrderProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello OrderProvider Provider');
   }
 
   placeOrder(buyerId: number, handlerId: number, orderItems: OrderItem[]): Observable<number> {
