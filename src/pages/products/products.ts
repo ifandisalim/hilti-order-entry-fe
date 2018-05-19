@@ -89,7 +89,7 @@ export class ProductsPage {
     let filteredCategories = this.filterByParentCategories(this.productSearchTerm);
 
 
-    if(filteredCategories.length <= 0) {
+    if (filteredCategories.length <= 0) {
       filteredCategories = this.filterByChildCategories(this.productSearchTerm);
     }
 

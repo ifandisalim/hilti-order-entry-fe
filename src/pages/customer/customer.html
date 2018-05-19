@@ -11,7 +11,7 @@
     <ion-card *ngIf="customerRepresentative" color="cardYellow">
         <ion-card-header style="height: 25px">
             <ion-buttons clear end>
-                <button clear end ion-button no-padding class="btnFav" color="dark"
+                <button clear end ion-button no-padding class="btnFav" color="danger"
                     *ngIf="isFavourite"
                     (click)="removeFromFavourite(customerRepresentative.id)"
                 >

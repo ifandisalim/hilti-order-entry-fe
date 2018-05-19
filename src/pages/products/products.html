@@ -29,7 +29,7 @@
             <div *ngFor="let parentCategoryName of parentCategoryNames"
                  class="list--level-1">
                 <ion-row class="list--child" (click)="toggleParentCategory(parentCategoryName)">
-                    <ion-col col-3>
+                    <ion-col col-3 class="list--child-image">
                         <img src="{{categoriesWithProducts[parentCategoryName].imageUrl}}" height="85%" width="85%">
                     </ion-col>
                     <ion-col align-self-center class="productName">
@@ -42,7 +42,7 @@
                          class="list--level-2">
                         <ion-row class="list--child"
                                  (click)="viewDetailedCategoryPage(categoriesWithProducts[parentCategoryName], childCategory)">
-                            <ion-col col-3>
+                            <ion-col col-3 class="list--child-image">
                                 <img src="{{childCategory.imageUrl}}" height="85%" width="85%">
                             </ion-col>
                             <ion-col align-self-center class="productName">

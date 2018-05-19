@@ -16,7 +16,7 @@
 
 
 <ion-content class="masterBg" padding>
-    <h1>{{categoryDetail?.name}}</h1>
+    <h1 class="category-title">{{categoryDetail?.name}}</h1>
     <p>{{categoryDetail?.description}}</p>
 
 
@@ -37,8 +37,9 @@
             </main>
 
             <div class="product-card--action-group">
+                Competitor Details
                 <button (click)="addProductToCart(product)">
-                    <ion-icon name="add"></ion-icon>
+                    ADD TO CART
                 </button>
             </div>
         </div>

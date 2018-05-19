@@ -48,6 +48,8 @@ export class EmployeeProvider {
   }
 
   addFavourite(employeeId: number, customerRepresentativeId: number): Observable<any> {
+    console.log("Employee id:" + employeeId);
+    console.log("Customer id: " + customerRepresentativeId);
     return this.http.post(`${constants.HOST_NAME}/employee/${employeeId}/favourites`, {
       favourites: [
         {
