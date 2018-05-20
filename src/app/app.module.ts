@@ -38,6 +38,8 @@ import {CartPage} from "../pages/cart/cart";
 import {OrderHelper} from "../helpers/orderHelper";
 import {activeCustomerReducer} from "../states/currentActiveCustomer/activeCustomer.reducers";
 import {CustomerHelper} from "../helpers/customerHelper";
+import {CompetitorDetailsPage} from "../pages/competitor-details/competitor-details";
+import {ProductHelper} from "../helpers/productHelper";
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import {CustomerHelper} from "../helpers/customerHelper";
     CustomerPage,
     ProductsPage,
     CategoryDetailPage,
+    CompetitorDetailsPage,
     CartPage
 
   ],
@@ -82,6 +85,7 @@ import {CustomerHelper} from "../helpers/customerHelper";
     CustomerPage,
     ProductsPage,
     CategoryDetailPage,
+    CompetitorDetailsPage,
     CartPage
   ],
   providers: [
@@ -95,6 +99,7 @@ import {CustomerHelper} from "../helpers/customerHelper";
     LocalStorageHelper,
     OrderHelper,
     CustomerHelper,
+    ProductHelper,
     ProductProvider
   ]
 })

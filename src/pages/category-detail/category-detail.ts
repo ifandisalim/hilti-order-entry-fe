@@ -8,6 +8,7 @@ import {OrderItem} from "../../models/orderItem";
 import {OrderHelper} from "../../helpers/orderHelper";
 import {Product} from "../../models/product";
 import {CartPage} from "../cart/cart";
+import {CompetitorDetailsPage} from "../competitor-details/competitor-details";
 
 /**
  * Generated class for the CategoryDetailPage page.
@@ -85,6 +86,10 @@ export class CategoryDetailPage {
         }
       ]
     }).present();
+  }
+
+  viewCompetitors(product: Product) {
+    this.navCtrl.push(CompetitorDetailsPage, {product});
   }
 
 

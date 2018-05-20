@@ -77,5 +77,33 @@ export class ProductProvider {
   }
 
 
+  public getCompetitorDetails(productId: number): Observable<any> {
+    return this.apollo.watchQuery<any>({
+      query: gql`
+            query {
+                product(id:${productId}) {
+                  id,
+                  name,
+                  competingProducts {
+                    id,
+                    name,
+                    imageUrl,
+                    description,
+                    price,
+                    features,
+                    technicalData
+                  }
+              }
+            }
+        `
+    })
+      .valueChanges
+      .pipe(
+        map(result => {
+          return result.data.product.competingProducts;
+        })
+      );
+  }
+
 }
 

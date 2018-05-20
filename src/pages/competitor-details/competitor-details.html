@@ -6,11 +6,137 @@
 -->
 <ion-header>
     <ion-navbar color="tabRed">
-      <ion-title>{{hiltiProduct?.name}}</ion-title>
+        <ion-title>{{hiltiProduct?.name}}</ion-title>
     </ion-navbar>
 </ion-header>
 
 
 <ion-content class="masterBg" padding>
-  <h1>Similar Competitors</h1>
+    <h1>Similar Competitors</h1>
+
+
+
+    <!-- Hilti -->
+    <ion-card>
+        <ion-card-header style="height: 25px">
+            <ion-buttons clear end>
+                <button clear end ion-button no-padding class="btnEdit" color="dark">
+                    <ion-icon name="md-create"></ion-icon>
+                </button>
+            </ion-buttons>
+
+        </ion-card-header>
+        <div class="product-image">
+            <img src="{{hiltiProduct?.imageUrl}}" alt="" />
+        </div>
+        <div class="customerName">{{hiltiProduct?.name}}</div>
+        <div class="customerCompany">HILTI</div>
+
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col padding>
+                        <ion-icon name="clipboard"></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                        <div class="cardContentTitle">DESCRIPTION</div>
+                        <div class="cardContent">Some data</div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col padding>
+                        <ion-icon name="book"></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                        <div class="cardContentTitle"> FEATURES </div>
+                        <div class="cardContent">
+                            Some data
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col padding>
+                        <ion-icon name="build"></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                        <div class="cardContentTitle">TECHNICAL DATA</div>
+                        <div class="cardContent">
+                            Some data
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+
+
+    <h2 *ngIf="!competitorProducts">
+        No Competitor data available.
+    </h2>
+
+    <!-- Competitor -->
+    <ng-container *ngIf="competitorProducts">
+        <ion-card>
+            <ion-card-header style="height: 25px">
+                <ion-buttons clear end>
+                    <button clear end ion-button no-padding class="btnEdit" color="dark">
+                        <ion-icon name="md-create"></ion-icon>
+                    </button>
+                </ion-buttons>
+
+            </ion-card-header>
+            <div class="product-image">
+                <img src="{{competitorProducts[0]?.imageUrl}}" alt="" />
+            </div>
+            <div class="customerName">{{competitorProducts[0]?.name}}</div>
+            <div class="customerCompany">BOSCH</div>
+
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col padding>
+                            <ion-icon name="clipboard"></ion-icon>
+                        </ion-col>
+                        <ion-col col-10>
+                            <div class="cardContentTitle">DESCRIPTION</div>
+                            <div class="cardContent">{{competitorProducts[0]?.description}}</div>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col padding>
+                            <ion-icon name="book"></ion-icon>
+                        </ion-col>
+                        <ion-col col-10>
+                            <div class="cardContentTitle">FEATURES</div>
+                            <div class="cardContent">
+                                <p *ngFor="let feature of competitorProducts[0]?.features">
+                                    - {{feature.description}}
+                                </p>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col padding>
+                            <ion-icon name="build"></ion-icon>
+                        </ion-col>
+                        <ion-col col-10>
+                            <div class="cardContentTitle">TECHNICAL DATA</div>
+                            <div class="cardContent">
+                                <p *ngFor="let data of competitorProducts[0]?.technicalData">
+                                    - {{data.label}}      :    {{data.value}}
+                                </p>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+    </ng-container>
+
 </ion-content>

@@ -2,6 +2,7 @@ import {ProductCategory} from "./productCategory";
 import {ProductApplication} from "./productApplication";
 import {ProductFeature} from "./productFeature";
 import {ProductContent} from "./productContent";
+import {ProductTechnicalData} from "./productTechnicalData";
 
 export interface Product {
   id?: number;
@@ -12,5 +13,5 @@ export interface Product {
   category?: ProductCategory;
   applications: Array<ProductApplication>;
   features?: Array<ProductFeature>;
-  content?: Array<ProductContent>;
+  technicalData: Array<ProductTechnicalData>;
 }
