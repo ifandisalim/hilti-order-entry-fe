@@ -15,140 +15,117 @@
     <h1>Similar Competitors</h1>
 
 
-
-    <!-- Hilti -->
-    <ion-card>
-        <ion-card-header style="height: 25px">
-            <ion-buttons clear end>
-                <button clear end ion-button no-padding class="btnEdit" color="dark">
-                    <ion-icon name="md-create"></ion-icon>
-                </button>
-            </ion-buttons>
-
-        </ion-card-header>
-        <div class="product-image">
-            <img src="{{hiltiProduct?.imageUrl}}" alt="" />
+    <div class="product-card product-card__detail">
+        <div class="product-card__detail--meta-data">
+            <div class="product-card__detail--meta-secondary">
+                <img src="{{hiltiProduct?.imageUrl}}">
+            </div>
+            <div class="product-card__detail--meta-primary">
+                <div class="container">
+                    <div class="product-name">{{hiltiProduct?.name}}</div>
+                    <div class="product-company">HILTI</div>
+                </div>
+            </div>
         </div>
-        <div class="customerName">{{hiltiProduct?.name}}</div>
-        <div class="customerCompany">HILTI</div>
 
-        <ion-card-content style="text-align:left">
-            <ion-grid>
-                <ion-row>
-                    <ion-col padding>
-                        <ion-icon name="clipboard"></ion-icon>
-                    </ion-col>
-                    <ion-col col-10>
-                        <div class="cardContentTitle">DESCRIPTION</div>
-                        <div class="cardContent">
-                            {{hiltiProduct?.description}}
-                        </div>
-                    </ion-col>
-                </ion-row>
+        <div class="product-card__detail--content">
+            <div class="product-card__detail--content--header">
+                description
+            </div>
+            <div class="product-card__detail--content--details">
+                {{hiltiProduct?.description}}
+            </div>
+        </div>
 
-                <ion-row>
-                    <ion-col padding>
-                        <ion-icon name="book"></ion-icon>
-                    </ion-col>
-                    <ion-col col-10>
-                        <div class="cardContentTitle"> FEATURES </div>
-                        <div class="cardContent">
-                            <p *ngFor="let feature of hiltiProduct?.features">
-                                - {{feature.description}}
-                            </p>
-                        </div>
-                    </ion-col>
-                </ion-row>
+        <div class="product-card__detail--content">
+            <div class="product-card__detail--content--header">
+                features
+            </div>
+            <div class="product-card__detail--content--details">
+                <ul>
+                    <li *ngFor="let feature of hiltiProduct?.features">
+                         {{feature.description}}
+                    </li>
+                </ul>
 
-                <ion-row>
-                    <ion-col padding>
-                        <ion-icon name="build"></ion-icon>
-                    </ion-col>
-                    <ion-col col-10>
-                        <div class="cardContentTitle">TECHNICAL DATA</div>
-                        <div class="cardContent">
-                            <p *ngFor="let data of hiltiProduct?.technicalData">
-                                - {{data.label}}      :    {{data.value}}
-                            </p>
-                        </div>
-                    </ion-col>
-                </ion-row>
+            </div>
+        </div>
 
-            </ion-grid>
-        </ion-card-content>
-    </ion-card>
+        <div class="product-card__detail--content">
+            <div class="product-card__detail--content--header">
+                technical data
+            </div>
+            <div class="product-card__detail--content--details">
+                <ul>
+                    <li *ngFor="let data of hiltiProduct?.technicalData">
+                        <span class="technical-data-label">{{data.label}} </span>: {{data.value}}
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
 
 
     <h2 *ngIf="!competitorProducts">
         No Competitor data available.
     </h2>
 
-    <!-- Competitor -->
-    <ng-container *ngIf="competitorProducts">
-        <ion-slides parallax = true  style="height: auto;"      >
-            <ion-slide *ngFor="let product of competitorProducts">
-                <ion-card>
-                    <ion-card-header style="height: 25px">
-                        <ion-buttons clear end>
-                            <button clear end ion-button no-padding class="btnEdit" color="dark">
-                                <ion-icon name="md-create"></ion-icon>
-                            </button>
-                        </ion-buttons>
-                    </ion-card-header>
 
-                    <div class="product-image">
-                        <img src="{{product.imageUrl}}" alt="" />
+    <ion-slides parallax = true  style="height: auto;">
+        <ion-slide  *ngFor="let product of competitorProducts">
+            <div class="product-card product-card__detail">
+                <div class="product-card__detail--meta-data">
+                    <div class="product-card__detail--meta-secondary">
+                        <img src="{{product.imageUrl}}">
                     </div>
+                    <div class="product-card__detail--meta-primary">
+                        <div class="container">
+                            <div class="product-name">{{product.name}}</div>
+                            <div class="product-company">BOSCH</div>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="customerName">{{product.name}}</div>
-                    <div class="customerCompany">BOSCH</div>
+                <div class="product-card__detail--content">
+                    <div class="product-card__detail--content--header">
+                        description
+                    </div>
+                    <div class="product-card__detail--content--details">
+                        {{product.description}}
+                    </div>
+                </div>
 
-                    <ion-card-content style="text-align:left">
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col padding>
-                                    <ion-icon name="clipboard"></ion-icon>
-                                </ion-col>
-                                <ion-col col-10>
-                                    <div class="cardContentTitle">DESCRIPTION</div>
-                                    <div class="cardContent">{{product.description}}</div>
-                                </ion-col>
-                            </ion-row>
+                <div class="product-card__detail--content">
+                    <div class="product-card__detail--content--header">
+                        features
+                    </div>
+                    <div class="product-card__detail--content--details">
+                        <ul>
+                            <li *ngFor="let feature of product.features">
+                                {{feature.description}}
+                            </li>
+                        </ul>
 
-                            <ion-row>
-                                <ion-col padding>
-                                    <ion-icon name="book"></ion-icon>
-                                </ion-col>
-                                <ion-col col-10>
-                                    <div class="cardContentTitle">FEATURES</div>
-                                    <div class="cardContent">
-                                        <p *ngFor="let feature of product.features">
-                                            - {{feature.description}}
-                                        </p>
-                                    </div>
-                                </ion-col>
-                            </ion-row>
+                    </div>
+                </div>
 
-                            <ion-row>
-                                <ion-col padding>
-                                    <ion-icon name="build"></ion-icon>
-                                </ion-col>
-                                <ion-col col-10>
-                                    <div class="cardContentTitle">TECHNICAL DATA</div>
-                                    <div class="cardContent">
-                                        <p *ngFor="let data of product.technicalData">
-                                            - {{data.label}}      :    {{data.value}}
-                                        </p>
-                                    </div>
-                                </ion-col>
-                            </ion-row>
+                <div class="product-card__detail--content">
+                    <div class="product-card__detail--content--header">
+                        technical data
+                    </div>
+                    <div class="product-card__detail--content--details">
+                        <ul>
+                            <li *ngFor="let data of product.technicalData">
+                                <span class="technical-data-label">{{data.label}} </span>: {{data.value}}
+                            </li>
+                        </ul>
 
-                        </ion-grid>
-                    </ion-card-content>
-
-                </ion-card>
-            </ion-slide>
-        </ion-slides>
-    </ng-container>
+                    </div>
+                </div>
+            </div>
+        </ion-slide>
+    </ion-slides>
 
 </ion-content>
