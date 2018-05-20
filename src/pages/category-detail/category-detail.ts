@@ -88,8 +88,8 @@ export class CategoryDetailPage {
     }).present();
   }
 
-  viewCompetitors(product: Product) {
-    this.navCtrl.push(CompetitorDetailsPage, {product});
+  viewCompetitors(product: Product, category: ProductCategory) {
+    this.navCtrl.push(CompetitorDetailsPage, {product, category});
   }
 
 

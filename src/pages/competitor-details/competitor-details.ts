@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, Slides} from 'ionic-angular';
 import {Product} from "../../models/product";
 import {ProductProvider} from "../../providers/product/product";
 import {ProductHelper} from "../../helpers/productHelper";
+import {ProductCategory} from "../../models/productCategory";
 
 /**
  * Generated class for the CompetitorDetailsPage page.
@@ -19,7 +20,10 @@ import {ProductHelper} from "../../helpers/productHelper";
 export class CompetitorDetailsPage {
 
   hiltiProduct: Product = null;
+  hiltiProductId: number = null;
+  hiltiCategory: ProductCategory = null;
   competitorProducts: Product[] = null;
+
 
   constructor(private navCtrl: NavController,
               private navParams: NavParams,
@@ -28,13 +32,11 @@ export class CompetitorDetailsPage {
   }
 
   ionViewWillLoad() {
-    this.hiltiProduct = this.navParams.get("product");
-    console.log(this.hiltiProduct);
-    this.productService.getCompetitorDetails(this.hiltiProduct.id)
-      .subscribe(competitorDetails => {
+    this.hiltiProductId = this.navParams.get("product").id;
+    this.hiltiCategory = this.navParams.get("category");
 
-        console.log("competitor details");
-        console.log(competitorDetails);
+    this.productService.getCompetitorDetails(this.hiltiCategory.id)
+      .subscribe(competitorDetails => {
 
         if(!competitorDetails || competitorDetails.length <=0) {
           return;
@@ -42,15 +44,24 @@ export class CompetitorDetailsPage {
 
         this.competitorProducts = competitorDetails.map(competitor => {
           let clonedCompetitor = Object.assign({}, competitor);
-          clonedCompetitor.technicalData = this.productHelper.parseTechnicalDataString(competitor.technicalData);
+          clonedCompetitor.technicalData = this.productHelper.parseBoschTechnicalData(competitor.technicalData);
           clonedCompetitor.features = this.productHelper.parseFeatureDataString(competitor.features);
           return clonedCompetitor
         });
 
-        console.log("==========Competitor products===========");
-        console.log(this.competitorProducts)
-
       });
+
+    this.productService.getProductDetails(this.hiltiProductId)
+      .subscribe(productDetail => {
+
+        console.log(productDetail.technicalData);
+
+        let clonedProduct = Object.assign({}, productDetail);
+        clonedProduct.technicalData = this.productHelper.parseHiltiTechnicalData(clonedProduct.technicalData);
+        clonedProduct.features = this.productHelper.parseFeatureDataString(clonedProduct.features);
+
+        this.hiltiProduct = clonedProduct;
+      })
   }
 
 

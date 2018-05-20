@@ -77,11 +77,11 @@ export class ProductProvider {
   }
 
 
-  public getCompetitorDetails(productId: number): Observable<any> {
+  public getCompetitorDetails(categoryId: number): Observable<any> {
     return this.apollo.watchQuery<any>({
       query: gql`
             query {
-                product(id:${productId}) {
+                category(id:${categoryId}) {
                   id,
                   name,
                   competingProducts {
@@ -100,10 +100,34 @@ export class ProductProvider {
       .valueChanges
       .pipe(
         map(result => {
-          return result.data.product.competingProducts;
+          return result.data.category.competingProducts;
         })
       );
   }
 
+
+  public getProductDetails(productId: number): Observable<any> {
+    return this.apollo.watchQuery<any>({
+      query: gql`
+            query {
+                product(id:${productId}) {
+                  id,
+                  name,
+                  imageUrl,
+                  description,
+                  price,
+                  features,
+                  technicalData
+              }
+            }
+        `
+    })
+      .valueChanges
+      .pipe(
+        map(result => {
+          return result.data.product;
+        })
+      );
+  }
 }
 

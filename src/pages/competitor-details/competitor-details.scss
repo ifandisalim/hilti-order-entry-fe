@@ -64,6 +64,11 @@ page-competitor-details {
   .product-image {
     margin: 20px auto;
     width: 35%;
+
+    img {
+      object-fit: contain;
+      height: 115px;
+    }
   }
 
   ion-card-content {
@@ -73,4 +78,8 @@ page-competitor-details {
 
   }
 
+  .swiper-slide {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }

@@ -1,7 +1,6 @@
 import {ProductCategory} from "./productCategory";
 import {ProductApplication} from "./productApplication";
 import {ProductFeature} from "./productFeature";
-import {ProductContent} from "./productContent";
 import {ProductTechnicalData} from "./productTechnicalData";
 
 export interface Product {

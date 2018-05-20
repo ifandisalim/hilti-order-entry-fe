@@ -5,8 +5,20 @@ import {ProductFeature} from "../models/productFeature";
 @Injectable()
 export class ProductHelper {
 
-  parseTechnicalDataString(technicalDataString): ProductTechnicalData[] {
-    technicalDataString = technicalDataString.replace(/'/g, '"').replace(/" "/g, ' inch "');
+  parseBoschTechnicalData(technicalDataString): ProductTechnicalData[] {
+    technicalDataString = technicalDataString
+      .replace(/"/g, ' inch')
+      .replace(/\r?\n/g, '')
+      .replace(/''/g, '')
+      .replace(/'/g, '"')
+      .replace(/\s\s+/g, '')
+      .replace(/""/g, '');
+
+    return JSON.parse(technicalDataString);
+  }
+
+  parseHiltiTechnicalData(technicalDataString): ProductTechnicalData[] {
+    technicalDataString = "[" + technicalDataString + "]";
     return JSON.parse(technicalDataString);
   }
 
