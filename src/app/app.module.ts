@@ -40,6 +40,7 @@ import {activeCustomerReducer} from "../states/currentActiveCustomer/activeCusto
 import {CustomerHelper} from "../helpers/customerHelper";
 import {CompetitorDetailsPage} from "../pages/competitor-details/competitor-details";
 import {ProductHelper} from "../helpers/productHelper";
+import constants from "./constants";
 
 @NgModule({
   declarations: [
@@ -131,7 +132,7 @@ export class AppModule {
   });
 
     // Link to GraphQL Server
-    const http = httpLink.create({ uri: 'http://localhost:9000/graphql' });
+    const http = httpLink.create({ uri: `${constants.HOST_NAME}/graphql` });
 
     // Apollo middleware to add Authorization header to each request
     const authorizationMiddleware = new ApolloLink((operation, forward) => {
@@ -146,7 +147,6 @@ export class AppModule {
     // Ng Store to update access token whenever its changed
     this.store.select('accessToken').subscribe(token => {
       this.accessToken = token;
-      console.log("Access token used: " + this.accessToken );
     });
 }
 
