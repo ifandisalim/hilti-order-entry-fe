@@ -41,6 +41,7 @@ import {CustomerHelper} from "../helpers/customerHelper";
 import {CompetitorDetailsPage} from "../pages/competitor-details/competitor-details";
 import {ProductHelper} from "../helpers/productHelper";
 import constants from "./constants";
+import {GraphicalAuthenticatorPage} from "../pages/graphical-authenticator/graphical-authenticator";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import constants from "./constants";
     ProductsPage,
     CategoryDetailPage,
     CompetitorDetailsPage,
-    CartPage
+    CartPage,
+    GraphicalAuthenticatorPage
 
   ],
   imports: [
@@ -87,7 +89,8 @@ import constants from "./constants";
     ProductsPage,
     CategoryDetailPage,
     CompetitorDetailsPage,
-    CartPage
+    CartPage,
+    GraphicalAuthenticatorPage
   ],
   providers: [
     StatusBar,
@@ -124,10 +127,10 @@ export class AppModule {
       apollo.create({
         link: concat(authorizationMiddleware, http),
         cache: new InMemoryCache(),
-        defaultOptions: {
-          query: {fetchPolicy: 'network-only'},
-          watchQuery: {fetchPolicy: 'network-only'}
-        }
+        // defaultOptions: {
+        //   query: {fetchPolicy: 'network-only'},
+        //   watchQuery: {fetchPolicy: 'network-only'}
+        // }
       });
   });
 

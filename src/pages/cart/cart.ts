@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, ToastController} from 'ionic-angular';
+import {IonicPage, ModalController, NavController, ToastController} from 'ionic-angular';
 import {OrderItem} from "../../models/orderItem";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../states/app.state";
@@ -9,6 +9,7 @@ import {OrderHelper} from "../../helpers/orderHelper";
 import {OrderProvider} from "../../providers/order/order";
 import {CustomerPage} from "../customer/customer";
 import {ContactPage} from "../contact/contact";
+import {GraphicalAuthenticatorPage} from "../graphical-authenticator/graphical-authenticator";
 
 /**
  * Generated class for the CartPage page.
@@ -33,6 +34,7 @@ export class CartPage {
   constructor(private navCtrl: NavController,
               private store: Store<AppState>,
               private toastCtrl: ToastController,
+              private modalCtrl: ModalController,
               private orderHelper: OrderHelper,
               private orderService: OrderProvider) {
 
@@ -65,29 +67,11 @@ export class CartPage {
     this.orderHelper.removeCartItem(item);
   }
 
-  presentOrderPlacementStatusToast(message: string): Promise<any> {
-    return this.toastCtrl.create({
-      message,
-      position: 'bottom',
-      duration: 2000
-    }).present();
-  }
+
 
   placeOrder() {
-    this.orderService.placeOrder(this.currentActiveCustomer.id, this.loggedInEmployee.id, this.shoppingCartItems)
-      .subscribe(orderId => {
+    this.navCtrl.push(GraphicalAuthenticatorPage);
 
-
-
-        this.presentOrderPlacementStatusToast("Order has been placed.")
-          .then(() => {
-            this.orderHelper.resetCart();
-            this.navCtrl.setRoot(ContactPage);
-          });
-
-      }, err => {
-        this.presentOrderPlacementStatusToast("Order placement failed. Try again later.");
-      })
   }
 
 }

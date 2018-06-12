@@ -1,6 +1,6 @@
 export default {
-  // HOST_NAME: "http://localhost:9000",
   HOST_NAME: "http://localhost:9000",
+  // HOST_NAME: "https://hilti-order-entry-be.herokuapp.com",
   HEADER_AUTHORIZATION: "Authorization",
 
   // Validation messages
